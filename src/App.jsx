@@ -1,14 +1,14 @@
 import { AppProvider } from "./AppContext";
 import "./App.css";
-import Button from "./Button";
-import Input from "./Input";
+import Inputs from "./Inputs";
+import SearchResults from "./SearchResults";
 
 function App() {
   return (
     <AppProvider>
       <main className="App">
-        <Input />
-        <Button />
+        <Inputs />
+        <SearchResults />
       </main>
     </AppProvider>
   );
