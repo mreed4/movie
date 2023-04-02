@@ -75,6 +75,14 @@ hr {
   font-size: 2em;
 }
 
+.movie-page {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
 .movie-poster {
   width: 150px;
   height: 250px;
