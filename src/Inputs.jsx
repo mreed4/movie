@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import { AppContext } from "./AppContext";
 import Button from "./Button";
+import Input from "./Input";
 
 export default function Inputs() {
-  const { searchTerm, handleInputChange, handleFormSubmit } = useContext(AppContext);
+  const { handleFormSubmit } = useContext(AppContext);
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <input type="text" name="search" id="search" value={searchTerm} onChange={handleInputChange} />
+      <Input />
       <Button />
     </form>
   );
