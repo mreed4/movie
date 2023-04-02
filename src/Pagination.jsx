@@ -9,7 +9,7 @@ export default function Pagination() {
       <div>
         <button onClick={handlePrevPage} disabled={page === 1}>
           Prev
-        </button>
+        </button>{" "}
         Page {page} <button onClick={handleNextPage}>Next</button>
       </div>
     )

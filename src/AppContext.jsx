@@ -7,7 +7,7 @@ const API = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 const AppContext = createContext();
 
 function AppProvider({ children }) {
-  const [search, setSearch] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
   const [movie, setMovie] = useState({});
   const [page, setPage] = useState(1);
@@ -15,7 +15,7 @@ function AppProvider({ children }) {
   useEffect(() => console.log(page), [page]);
 
   function getMovies() {
-    fetch(`${API}&s=${search}&page=${page}&type=movie`)
+    fetch(`${API}&s=${searchTerm}&page=${page}&type=movie`)
       .then((response) => response.json())
       .then((data) => {
         // console.log(data);
@@ -35,7 +35,7 @@ function AppProvider({ children }) {
   }
 
   function handleInputChange(event) {
-    setSearch(event.target.value);
+    setSearchTerm(event.target.value);
   }
 
   function handleFormSubmit(event) {
@@ -44,7 +44,7 @@ function AppProvider({ children }) {
     getMovies();
 
     setPage(1);
-    setSearch("");
+    setSearchTerm("");
     setMovies([]);
   }
 
@@ -64,7 +64,7 @@ function AppProvider({ children }) {
   }
 
   const value = {
-    search,
+    searchTerm,
     movies,
     movie,
     page,
