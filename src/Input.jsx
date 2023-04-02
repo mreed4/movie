@@ -4,5 +4,15 @@ import { AppContext } from "./AppContext";
 export default function Input() {
   const { searchTerm, handleInputChange } = useContext(AppContext);
 
-  return <input type="text" name="search" id="search" value={searchTerm} onChange={handleInputChange} />;
+  return (
+    <input
+      type="text"
+      name="search"
+      id="search"
+      value={searchTerm}
+      onChange={handleInputChange}
+      title="What movie are you looking for?"
+      placeholder="Search term"
+    />
+  );
 }
