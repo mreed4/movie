@@ -7,8 +7,8 @@ export default function SearchResults() {
   const { movies, toKebabCase } = useContext(AppContext);
 
   return (
-    movies && (
-      <>
+    movies.length !== 0 && (
+      <div id="search-results">
         <ol>
           {movies.map(({ Poster: src, Title: title, Year: year, imdbID: id }, i) => (
             <li key={i}>
@@ -18,8 +18,8 @@ export default function SearchResults() {
             </li>
           ))}
         </ol>
-        {/* <Pagination /> */}
-      </>
+        <Pagination />
+      </div>
     )
   );
 }
