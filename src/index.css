@@ -32,10 +32,14 @@ main {
   padding: 0;
 }
 
-ol {
+ol,
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+ol {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -92,6 +96,21 @@ hr {
   height: 375px;
   object-fit: cover;
   display: block;
+}
+
+.movie-meta li {
+  margin-bottom: 0.5em;
+}
+
+.actor {
+  display: inline-block;
+  /* background-color: silver; */
+  margin-right: 3px;
+  padding: 3px;
+}
+
+.actor:last-child {
+  margin-right: 0;
 }
 
 @media (prefers-color-scheme: light) {
