@@ -2,12 +2,15 @@ import { useContext } from "react";
 import { AppContext } from "./AppContext";
 
 export default function Pagination() {
-  const { movies, page, handleNextPage } = useContext(AppContext);
+  const { movies, page, handleNextPage, handlePrevPage } = useContext(AppContext);
 
   return (
-    movies && (
+    movies.length !== 0 && (
       <div>
-        {page} <button onClick={handleNextPage}>Next</button>
+        <button onClick={handlePrevPage} disabled={page === 1}>
+          Prev
+        </button>
+        Page {page} <button onClick={handleNextPage}>Next</button>
       </div>
     )
   );
