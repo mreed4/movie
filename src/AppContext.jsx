@@ -8,6 +8,7 @@ const AppContext = createContext();
 function AppProvider({ children }) {
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
+  const [movie, setMovie] = useState({});
   const [page, setPage] = useState(1);
 
   useEffect(() => console.log(page), [page]);
@@ -16,8 +17,18 @@ function AppProvider({ children }) {
     fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}&page=${page}&type=movie`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setMovies(data.Search);
+      })
+      .catch((error) => console.error(error));
+  }
+
+  function getMovieInfo(id) {
+    fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&i=${id}&plot=full`)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data);
+        setMovie(data);
       })
       .catch((error) => console.error(error));
   }
@@ -41,7 +52,27 @@ function AppProvider({ children }) {
     // getMovies();
   }
 
-  const value = { search, movies, page, setPage, handleInputChange, handleFormSubmit, handleNextPage };
+  function handlePrevPage() {
+    setPage((prev) => prev - 1);
+    // getMovies();
+  }
+
+  function toKebabCase(str) {
+    return str.toLowerCase().replace(/ /g, "-");
+  }
+
+  const value = {
+    search,
+    movies,
+    movie,
+    page,
+    getMovieInfo,
+    handleInputChange,
+    handleFormSubmit,
+    handleNextPage,
+    handlePrevPage,
+    toKebabCase,
+  };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }

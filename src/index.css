@@ -88,6 +88,12 @@ hr {
   transform: scale(1.1);
 }
 
+.movie-poster-big {
+  width: 300px;
+  height: 500px;
+  object-fit: cover;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
