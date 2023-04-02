@@ -1,6 +1,5 @@
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useParams, Link } from "react-router-dom";
+import { useEffect, useContext } from "react";
 import { AppContext } from "./AppContext";
 
 export default function MoviePage() {
@@ -23,15 +22,18 @@ export default function MoviePage() {
   useEffect(() => getMovieInfo(id), []);
 
   return (
-    <article className="movie-page">
-      <div>
-        <img src={poster} alt={title} className="movie-poster-big" />
-      </div>
-      <div>
-        <h1>{title}</h1>
-        <p>{year}</p>
-        <p>{plot}</p>
-      </div>
-    </article>
+    <>
+      <article className="movie-page">
+        <div>
+          <img src={poster} alt={title} className="movie-poster-big" />
+        </div>
+        <div className="movie-info">
+          <Link to="/">Back</Link>
+          <h1>{title}</h1>
+          <p>{year}</p>
+          <p>{plot}</p>
+        </div>
+      </article>
+    </>
   );
 }
