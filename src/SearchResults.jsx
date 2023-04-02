@@ -12,7 +12,7 @@ export default function SearchResults() {
         {movies.map(({ Poster: src, Title: title, Year: year, imdbID: id }, i) => (
           <li key={i}>
             <Link to={`/movie/${id}/${toKebabCase(title)}-${year}`}>
-              <img src={src !== "N/A" ? src : "https://placehold.co/150x250?text=No+Poster"} className="movie-poster" />
+              <img src={src !== "N/A" ? src : "https://placehold.co/150x250?text=No+Poster"} className="movie-poster" alt={title} />
             </Link>
           </li>
         ))}
