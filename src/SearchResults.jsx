@@ -15,7 +15,7 @@ export default function SearchResults() {
             </li>
           ))}
         </ol>
-        <Pagination />
+        {/* <Pagination /> */}
       </>
     )
   );

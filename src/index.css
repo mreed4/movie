@@ -51,7 +51,7 @@ ol {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-bottom: 3rem;
 }
 
@@ -80,6 +80,12 @@ hr {
   height: 250px;
   margin: 0.5rem;
   object-fit: cover;
+  cursor: pointer;
+  transition: transform 150ms;
+}
+
+.movie-poster:hover {
+  transform: scale(1.1);
 }
 
 @media (prefers-color-scheme: light) {
