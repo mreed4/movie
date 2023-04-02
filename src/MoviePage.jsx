@@ -22,18 +22,21 @@ export default function MoviePage() {
   useEffect(() => getMovieInfo(id), []);
 
   return (
-    <>
-      <article className="movie-page">
-        <div>
-          <img src={poster} alt={title} className="movie-poster-big" />
-        </div>
-        <div className="movie-info">
-          <Link to="/">Back</Link>
-          <h1>{title}</h1>
-          <p>{year}</p>
-          <p>{plot}</p>
-        </div>
-      </article>
-    </>
+    <article className="movie-page">
+      <div>
+        <img src={poster} alt={title} className="movie-poster-big" />
+      </div>
+      <div className="movie-info">
+        <Link to="/">Back</Link>
+        <h1>{title}</h1>
+        <p>{year}</p>
+        <p>{plot}</p>
+        <ul className="movie-meta">
+          <li>{director}</li>
+          <li>{actors}</li>
+          <li>{genre}</li>
+        </ul>
+      </div>
+    </article>
   );
 }
