@@ -13,7 +13,8 @@ export default function MoviePage() {
     Genre: genre,
     Director: director,
     Actors: actors,
-    imdbRating: rating,
+    Rated: rated,
+    Ratings: ratings,
   } = movie;
 
   const params = useParams();
@@ -22,11 +23,15 @@ export default function MoviePage() {
   useEffect(() => getMovieInfo(id), []);
 
   return (
-    <>
-      <h1>{title}</h1>
-      <h2>{year}</h2>
-      <img src={poster} alt={title} className="movie-poster-big" />
-      <p>{plot}</p>
-    </>
+    <article className="movie-page">
+      <div>
+        <img src={poster} alt={title} className="movie-poster-big" />
+      </div>
+      <div>
+        <h1>{title}</h1>
+        <p>{year}</p>
+        <p>{plot}</p>
+      </div>
+    </article>
   );
 }
