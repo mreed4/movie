@@ -102,14 +102,13 @@ hr {
   margin-bottom: 0.5em;
 }
 
-.actor {
+.rating-source {
   display: inline-block;
   /* background-color: silver; */
-  margin-right: 3px;
-  padding: 3px;
+  margin-right: 1em;
 }
 
-.actor:last-child {
+.rating-source:last-child {
   margin-right: 0;
 }
 
