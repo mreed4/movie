@@ -3,7 +3,7 @@ import { useEffect, useContext } from "react";
 import { AppContext } from "./AppContext";
 
 export default function MoviePage() {
-  const { movie, getMovieInfo } = useContext(AppContext);
+  const { movie, getMovieInfo, parseRatings } = useContext(AppContext);
   const {
     Title: title,
     Year: year,
@@ -29,13 +29,19 @@ export default function MoviePage() {
       <div className="movie-info">
         <Link to="/">Back</Link>
         <h1>{title}</h1>
-        <p>{year}</p>
+        <p>
+          {year} &middot; {rated}
+        </p>
+        <ul className="movie-ratings">{parseRatings(ratings)}</ul>
         <p>{plot}</p>
         <ul className="movie-meta">
-          <li>{director}</li>
-          <li>{actors}</li>
-          <li>{genre}</li>
+          <li>Director: {director}</li>
+          <li>Actors: {actors}</li>
+          <li>Genre: {genre}</li>
         </ul>
+        <a href={`https://www.imdb.com/title/${id}`} target="_blank">
+          More
+        </a>
       </div>
     </article>
   );
