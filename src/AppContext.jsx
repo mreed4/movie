@@ -63,6 +63,23 @@ function AppProvider({ children }) {
     return str.toLowerCase().replace(/ /g, "-");
   }
 
+  function parseRatings(ratings) {
+    return (
+      ratings?.map((rating, i) => {
+        const { Source: source, Value: value } = rating;
+        const dict = {
+          "Internet Movie Database": "IMDB",
+          "Rotten Tomatoes": "RT",
+        };
+        return (
+          <li key={i} className="rating-source">
+            {dict[source] || source}: {value}
+          </li>
+        );
+      }) ?? null
+    );
+  }
+
   const value = {
     searchTerm,
     movies,
@@ -74,6 +91,7 @@ function AppProvider({ children }) {
     handleNextPage,
     handlePrevPage,
     toKebabCase,
+    parseRatings,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
