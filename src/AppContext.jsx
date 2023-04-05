@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
-import { config } from "./config.js";
+// import { config } from "./config.js";
 
-const { API_KEY } = config;
+// const { API_KEY } = config;
 const API = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 
 const AppContext = createContext();
