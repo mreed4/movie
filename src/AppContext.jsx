@@ -1,8 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 
-// const API_KEY = import.meta.env.VITE_API_KEY;
-// const API = `https://www.omdbapi.com/?apikey=${API_KEY}`;
-
 const AppContext = createContext();
 
 function AppProvider({ children }) {
@@ -15,20 +12,25 @@ function AppProvider({ children }) {
 
   async function getSearchResults() {
     setSearchResults([]);
+
     if (!searchTerm) return;
 
     const URL = `/.netlify/functions/getSearchResults?s=${searchTerm}&type=movie&page=${page}`;
     const response = await fetch(URL);
     const data = await response.json();
+
     setSearchResults(data);
   }
 
   async function getMovieInfo(id) {
     setMovie({});
+
     if (!id) return;
+
     const URL = `/.netlify/functions/getMovieInfo?i=${id}`;
     const response = await fetch(URL);
     const data = await response.json();
+
     setMovie(data);
   }
 
@@ -43,7 +45,6 @@ function AppProvider({ children }) {
 
     setPage(1);
     setSearchTerm("");
-    setSearchResults([]);
   }
 
   function handleNextPage() {
