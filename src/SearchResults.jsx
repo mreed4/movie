@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 
 export default function SearchResults() {
-  const { movies, toKebabCase, getMovieInfo } = useContext(AppContext);
+  const { searchResults, toKebabCase, getMovieInfo } = useContext(AppContext);
 
-  return movies && movies.length !== 0 ? (
+  return searchResults && searchResults.length !== 0 ? (
     <div id="search-results">
       <ol>
-        {movies.map((movie, i) => {
+        {searchResults.map((movie, i) => {
           console.log(movie);
           const { imdbID: id, Title: title, Year: year, Poster: src } = movie;
           return (
@@ -24,6 +24,6 @@ export default function SearchResults() {
       <Pagination />
     </div>
   ) : (
-    !movies && "No movies found"
+    !searchResults && "No searchResults found"
   );
 }

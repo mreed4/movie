@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { AppContext } from "./AppContext";
 
 export default function Pagination() {
-  const { movies, page, handleNextPage, handlePrevPage } = useContext(AppContext);
+  const { searchResults, page, handleNextPage, handlePrevPage } = useContext(AppContext);
 
   return (
-    movies.length !== 0 && (
+    searchResults.length !== 0 && (
       <div>
         <button onClick={handlePrevPage} disabled={page === 1}>
           Prev

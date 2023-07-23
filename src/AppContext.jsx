@@ -7,20 +7,20 @@ const AppContext = createContext();
 
 function AppProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [movies, setMovies] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [movie, setMovie] = useState({});
   const [page, setPage] = useState(1);
 
   useEffect(() => console.log(page), [page]);
 
-  async function getMovies() {
-    setMovies([]);
+  async function getSearchResults() {
+    setSearchResults([]);
     if (!searchTerm) return;
 
-    const URL = `/.netlify/functions/getMovies?s=${searchTerm}&type=movie&page=${page}`;
+    const URL = `/.netlify/functions/getSearchResults?s=${searchTerm}&type=movie&page=${page}`;
     const response = await fetch(URL);
     const data = await response.json();
-    setMovies(data);
+    setSearchResults(data);
   }
 
   async function getMovieInfo(id) {
@@ -30,14 +30,6 @@ function AppProvider({ children }) {
     const response = await fetch(URL);
     const data = await response.json();
     setMovie(data);
-
-    // fetch(`${API}&i=${id}`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setMovie(data);
-    //   })
-    //   .catch((error) => console.error(error));
   }
 
   function handleInputChange(event) {
@@ -47,22 +39,22 @@ function AppProvider({ children }) {
   function handleFormSubmit(event) {
     event.preventDefault();
 
-    getMovies();
+    getSearchResults();
 
     setPage(1);
     setSearchTerm("");
-    setMovies([]);
+    setSearchResults([]);
   }
 
   function handleNextPage() {
     setPage((prev) => prev + 1);
-    // getMovies();
+    // getSearchResults();
   }
 
   function handlePrevPage() {
     if (page === 1) return;
     setPage((prev) => prev - 1);
-    // getMovies();
+    // getSearchResults();
   }
 
   function toKebabCase(str) {
@@ -88,7 +80,7 @@ function AppProvider({ children }) {
 
   const value = {
     searchTerm,
-    movies,
+    searchResults,
     movie,
     page,
     getMovieInfo,
