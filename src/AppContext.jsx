@@ -1,8 +1,7 @@
 import { createContext, useState, useEffect } from "react";
-// import { config } from "./config.js";
 
-const API_KEY = import.meta.env.VITE_API_KEY;
-const API = `https://www.omdbapi.com/?apikey=${API_KEY}`;
+// const API_KEY = import.meta.env.VITE_API_KEY;
+// const API = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 
 const AppContext = createContext();
 
@@ -14,24 +13,31 @@ function AppProvider({ children }) {
 
   useEffect(() => console.log(page), [page]);
 
-  function getMovies() {
-    fetch(`${API}&s=${searchTerm}&page=${page}&type=movie`)
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-        setMovies(data.Search);
-      })
-      .catch((error) => console.error(error));
+  async function getMovies() {
+    setMovies([]);
+    if (!searchTerm) return;
+
+    const URL = `/.netlify/functions/getMovies?s=${searchTerm}&type=movie&page=${page}`;
+    const response = await fetch(URL);
+    const data = await response.json();
+    setMovies(data);
   }
 
-  function getMovieInfo(id) {
-    fetch(`${API}&i=${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setMovie(data);
-      })
-      .catch((error) => console.error(error));
+  async function getMovieInfo(id) {
+    setMovie({});
+    if (!id) return;
+    const URL = `/.netlify/functions/getMovieInfo?i=${id}`;
+    const response = await fetch(URL);
+    const data = await response.json();
+    setMovie(data);
+
+    // fetch(`${API}&i=${id}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     setMovie(data);
+    //   })
+    //   .catch((error) => console.error(error));
   }
 
   function handleInputChange(event) {

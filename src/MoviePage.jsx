@@ -1,9 +1,9 @@
-import { useParams, Link } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { AppContext } from "./AppContext";
 
 export default function MoviePage() {
-  const { movie, getMovieInfo, parseRatings } = useContext(AppContext);
+  const { movie, parseRatings } = useContext(AppContext);
   const {
     Title: title,
     Year: year,
@@ -14,12 +14,8 @@ export default function MoviePage() {
     Actors: actors,
     Rated: rated,
     Ratings: ratings,
+    imdbID: id,
   } = movie;
-
-  const params = useParams();
-  const { id } = params;
-
-  useEffect(() => getMovieInfo(id), []);
 
   return (
     <article className="movie-page">

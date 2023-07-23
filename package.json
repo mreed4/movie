@@ -2,13 +2,16 @@
   "name": "movie",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "netlify": "netlify"
   },
   "dependencies": {
+    "axios": "^1.4.0",
+    "netlify-cli": "^15.9.1",
+    "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0"

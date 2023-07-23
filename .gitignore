@@ -25,3 +25,6 @@ dist-ssr
 
 netlify
 .env
+lambda/
+# Local Netlify folder
+.netlify
