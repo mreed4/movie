@@ -10,7 +10,6 @@ export default function SearchResults() {
     <div id="search-results">
       <ol>
         {searchResults.map((movie, i) => {
-          console.log(movie);
           const { imdbID: id, Title: title, Year: year, Poster: src } = movie;
           return (
             <li key={i}>
@@ -21,7 +20,7 @@ export default function SearchResults() {
           );
         })}
       </ol>
-      <Pagination />
+      {/* <Pagination /> */}
     </div>
   ) : (
     !searchResults && "No searchResults found"
