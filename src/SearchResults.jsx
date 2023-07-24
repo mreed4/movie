@@ -23,6 +23,6 @@ export default function SearchResults() {
       {/* <Pagination /> */}
     </div>
   ) : (
-    !searchResults && "No searchResults found"
+    !searchResults && "No results found"
   );
 }

@@ -3,21 +3,28 @@ const handler = async (event) => {
   const API_KEY = process.env.API_KEY;
   const URL = `https://www.omdbapi.com/?apikey=${API_KEY}&i=${movieId}`;
 
-  const response = await fetch(URL);
+  try {
+    const response = await fetch(URL);
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return {
+        statusCode: response.status,
+        body: response.statusText,
+      };
+    }
+
+    const data = await response.json();
+
     return {
-      statusCode: response.status,
-      body: response.statusText,
+      statusCode: 200,
+      body: JSON.stringify(data),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify(error),
     };
   }
-
-  const data = await response.json();
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify(data),
-  };
 };
 
 module.exports = { handler };
