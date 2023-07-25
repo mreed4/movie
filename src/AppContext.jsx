@@ -1,37 +1,38 @@
 import { createContext, useState, useEffect } from "react";
-import { config } from "./config.js";
-
-const { API_KEY } = config;
-const API = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 
 const AppContext = createContext();
 
 function AppProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [movies, setMovies] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [movie, setMovie] = useState({});
   const [page, setPage] = useState(1);
 
   useEffect(() => console.log(page), [page]);
 
-  function getMovies() {
-    fetch(`${API}&s=${searchTerm}&page=${page}&type=movie`)
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-        setMovies(data.Search);
-      })
-      .catch((error) => console.error(error));
+  async function getSearchResults() {
+    setSearchResults([]);
+
+    if (!searchTerm) return;
+
+    const URL = `/.netlify/functions/getSearchResults?s=${searchTerm}&type=movie&page=${page}`;
+    const response = await fetch(URL);
+    const data = await response.json();
+    const { Search: searchResults } = data;
+
+    setSearchResults(searchResults);
   }
 
-  function getMovieInfo(id) {
-    fetch(`${API}&i=${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setMovie(data);
-      })
-      .catch((error) => console.error(error));
+  async function getMovieInfo(id) {
+    setMovie({});
+
+    if (!id) return;
+
+    const URL = `/.netlify/functions/getMovieInfo?i=${id}`;
+    const response = await fetch(URL);
+    const data = await response.json();
+
+    setMovie(data);
   }
 
   function handleInputChange(event) {
@@ -41,22 +42,21 @@ function AppProvider({ children }) {
   function handleFormSubmit(event) {
     event.preventDefault();
 
-    getMovies();
+    getSearchResults();
 
     setPage(1);
     setSearchTerm("");
-    setMovies([]);
   }
 
   function handleNextPage() {
     setPage((prev) => prev + 1);
-    // getMovies();
+    // getSearchResults();
   }
 
   function handlePrevPage() {
     if (page === 1) return;
     setPage((prev) => prev - 1);
-    // getMovies();
+    // getSearchResults();
   }
 
   function toKebabCase(str) {
@@ -82,7 +82,7 @@ function AppProvider({ children }) {
 
   const value = {
     searchTerm,
-    movies,
+    searchResults,
     movie,
     page,
     getMovieInfo,

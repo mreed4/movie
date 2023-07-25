@@ -4,22 +4,25 @@ import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 
 export default function SearchResults() {
-  const { movies, toKebabCase } = useContext(AppContext);
+  const { searchResults, toKebabCase, getMovieInfo } = useContext(AppContext);
 
-  return movies && movies.length !== 0 ? (
+  return searchResults && searchResults.length !== 0 ? (
     <div id="search-results">
       <ol>
-        {movies.map(({ Poster: src, Title: title, Year: year, imdbID: id }, i) => (
-          <li key={i}>
-            <Link to={`/movie/${id}/${toKebabCase(title)}-${year}`}>
-              <img src={src !== "N/A" ? src : "https://placehold.co/150x250?text=No+Poster"} className="movie-poster" alt={title} />
-            </Link>
-          </li>
-        ))}
+        {searchResults.map((movie, i) => {
+          const { imdbID: id, Title: title, Year: year, Poster: src } = movie;
+          return (
+            <li key={i}>
+              <Link to={`/movie/${id}/${toKebabCase(title)}-${year}`} onClick={() => getMovieInfo(id)}>
+                <img src={src !== "N/A" ? src : "https://placehold.co/150x250?text=No+Poster"} className="movie-poster" alt={title} />
+              </Link>
+            </li>
+          );
+        })}
       </ol>
-      <Pagination />
+      {/* <Pagination /> */}
     </div>
   ) : (
-    !movies && "No movies found"
+    !searchResults && "No results found"
   );
 }
