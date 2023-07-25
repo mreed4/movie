@@ -1,8 +1,5 @@
 import { AppProvider } from "./AppContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./App.css";
-import Search from "./Search";
-import MoviePage from "./MoviePage";
 
 function App() {
   return (
@@ -10,9 +7,10 @@ function App() {
       <Router>
         <main className="App">
           <Routes>
-            <Route path="/" element={<Search />}></Route>
-            <Route path="/movie/:id/:slug" element={<MoviePage />}></Route>
-            <Route path="*" element={<h1>404</h1>}></Route>
+            <Route path="/" element={<h1>Home</h1>} />
+            <Route path="/about" element={<h1>About</h1>} />
+            <Route path="/dashboard" element={<h1>Dashboard</h1>} />
+            <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
         </main>
       </Router>

@@ -18,9 +18,10 @@ function AppProvider({ children }) {
     const URL = `/.netlify/functions/getSearchResults?s=${searchTerm}&type=movie&page=${page}`;
     const response = await fetch(URL);
     const data = await response.json();
-    const { Search: searchResults } = data;
 
-    setSearchResults(searchResults);
+    // setSearchResults(data.Search);
+
+    console.log(data);
   }
 
   async function getMovieInfo(id) {
@@ -32,7 +33,9 @@ function AppProvider({ children }) {
     const response = await fetch(URL);
     const data = await response.json();
 
-    setMovie(data);
+    // setMovie(data);
+
+    console.log(data);
   }
 
   function handleInputChange(event) {
