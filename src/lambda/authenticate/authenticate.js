@@ -1,8 +1,7 @@
 const handler = async (event) => {
   const TOKEN = process.env.TOKEN;
-  const { query: searchTerm } = event.queryStringParameters;
 
-  const URL = `https://api.themoviedb.org/3/search/multi?query=${searchTerm}&include_adult=false`;
+  const url = "https://api.themoviedb.org/3/authentication/token/new";
   const options = {
     method: "GET",
     headers: {
@@ -11,15 +10,8 @@ const handler = async (event) => {
     },
   };
 
-  const response = await fetch(URL, options);
+  const response = await fetch(url, options);
   const data = await response.json();
-
-  if (!response.ok) {
-    return {
-      statusCode: response.status,
-      body: response.statusText,
-    };
-  }
 
   try {
     return {
