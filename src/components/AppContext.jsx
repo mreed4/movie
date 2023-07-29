@@ -2,17 +2,22 @@ import { createContext, useState, useEffect } from "react";
 
 const AppContext = createContext();
 
+const netlify = `./netlify/functions`;
+
 function AppProvider({ children }) {
   const [appState, setAppState] = useState({
-    searchTerm: "red",
+    searchTerm: "",
     searchResults: [],
     movie: {},
     requestToken: "", // Not used yet
+    page: 1,
   });
+
+  const { page } = appState;
 
   async function authenticate() {
     // Not used yet
-    const URL = "/.netlify/functions/authenticate";
+    const URL = `${netlify}/authenticate`;
     const response = await fetch(URL);
     const data = await response.json();
 
@@ -24,51 +29,92 @@ function AppProvider({ children }) {
     }));
   }
 
-  async function getSearchResults() {
+  function getSearchResults(page) {
     const { searchTerm } = appState;
-
-    setAppState((prev) => ({
-      ...prev,
-      searchResults: [],
-    }));
 
     if (!searchTerm) return;
 
-    const URL = `/.netlify/functions/getSearchResults?query=${searchTerm}&include_adult=false`;
-    const response = await fetch(URL);
-    const data = await response.json();
+    const URL = `/.netlify/functions/search?query=${searchTerm}&include_adult=false&page=${page}`;
 
-    console.log(data);
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        const { results } = data;
+
+        setAppState((prev) => ({
+          ...prev,
+          searchResults: results,
+        }));
+      });
   }
 
-  async function getMovieInfo(id) {
-    setAppState((prev) => ({
-      ...prev,
-      movie: {},
-    }));
-
+  function getMovieInfo(id) {
     if (!id) return;
 
     const URL = `/.netlify/functions/getMovieInfo?movie_id=${id}`;
-    const response = await fetch(URL);
-    const data = await response.json();
+
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+
+        setAppState((prev) => ({
+          ...prev,
+          movie: data,
+        }));
+      });
   }
 
-  function handleInputChange(event) {
-    setSearchTerm(event.target.value);
+  function handleSearchInputChange(event) {
+    const { value } = event.target;
+
+    setAppState((prev) => ({
+      ...prev,
+      searchTerm: value,
+    }));
   }
 
   function handleFormSubmit(event) {
     event.preventDefault();
 
-    getSearchResults();
+    getSearchResults(page);
 
-    setPage(1);
-    setSearchTerm("");
+    setAppState((prev) => ({
+      ...prev,
+      searchTerm: "",
+    }));
   }
 
   function toKebabCase(str) {
     return str.toLowerCase().replace(/ /g, "-");
+  }
+
+  function nextPage() {
+    const { page } = appState;
+
+    setAppState((prev) => ({
+      ...prev,
+      page: prev.page + 1,
+    }));
+
+    console.log(page);
+
+    getSearchResults(page);
+  }
+
+  function prevPage() {
+    const { page } = appState;
+
+    if (page === 1) return;
+
+    setAppState((prev) => ({
+      ...prev,
+      page: prev.page - 1,
+    }));
+
+    console.log(page);
+
+    getSearchResults(page);
   }
 
   const value = {
@@ -77,9 +123,11 @@ function AppProvider({ children }) {
     authenticate,
     getSearchResults,
     getMovieInfo,
-    handleInputChange,
+    handleSearchInputChange,
     handleFormSubmit,
     toKebabCase,
+    nextPage,
+    prevPage,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

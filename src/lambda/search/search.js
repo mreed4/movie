@@ -1,8 +1,8 @@
 const handler = async (event) => {
   const TOKEN = process.env.TOKEN;
-  const { query: searchTerm } = event.queryStringParameters;
+  const { query: searchTerm, page } = event.queryStringParameters;
 
-  const URL = `https://api.themoviedb.org/3/search/multi?query=${searchTerm}&include_adult=false`;
+  const URL = `https://api.themoviedb.org/3/search/movie?query=${searchTerm}&include_adult=false&page=${page}`;
   const options = {
     method: "GET",
     headers: {
@@ -17,7 +17,7 @@ const handler = async (event) => {
   if (!response.ok) {
     return {
       statusCode: response.status,
-      body: response.statusText,
+      body: JSON.stringify(response.statusText),
     };
   }
 

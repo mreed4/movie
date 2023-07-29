@@ -1,22 +1,16 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import { AppContext } from "./AppContext";
+
+// import "../assets/css/App.css";
+
+import SearchPage from "./pages/SearchPage";
 
 function App() {
-  const { authenticate, getSearchResults } = useContext(AppContext);
-
-  useEffect(() => {
-    // authenticate();
-    getSearchResults();
-  }, []);
-
   return (
     <Router>
       <main className="App">
         <Routes>
-          <Route path="/" element={<h1>Home</h1>} />
-          <Route path="/about" element={<h1>About</h1>} />
-          <Route path="/dashboard" element={<h1>Dashboard</h1>} />
+          <Route path="/" element={<SearchPage />} />
+          <Route path="/movie/:title-year" element={<SearchPage />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </main>
