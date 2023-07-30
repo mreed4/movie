@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 const AppContext = createContext();
 
-const netlify = `./netlify/functions`;
+const netlify = `/.netlify/functions`;
 
 function AppProvider({ children }) {
   const [appState, setAppState] = useState({
@@ -29,23 +29,23 @@ function AppProvider({ children }) {
     }));
   }
 
-  function getSearchResults(page) {
-    const { searchTerm } = appState;
+  async function getSearchResults(page) {
+    const { searchTerm, searchResults } = appState;
 
     if (!searchTerm) return;
 
-    const URL = `/.netlify/functions/search?query=${searchTerm}&include_adult=false&page=${page}`;
+    const URL = `${netlify}/search?query=${searchTerm}&include_adult=false&page=${page}`;
 
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => {
-        const { results } = data;
+    const response = await fetch(URL);
+    const data = await response.json();
+    const { results } = data;
 
-        setAppState((prev) => ({
-          ...prev,
-          searchResults: results,
-        }));
-      });
+    console.log(results);
+
+    setAppState((prev) => ({
+      ...prev,
+      searchResults: results,
+    }));
   }
 
   function getMovieInfo(id) {

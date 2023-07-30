@@ -1,8 +1,23 @@
-const handler = async (event) => {
+async function handler(event) {
   const TOKEN = process.env.TOKEN;
   const { query: searchTerm, page } = event.queryStringParameters;
 
-  const URL = `https://api.themoviedb.org/3/search/movie?query=${searchTerm}&include_adult=false&page=${page}`;
+  const endpoint = "https://api.themoviedb.org/3/search/movie";
+  const endpoint2 = "https://api.themoviedb.org/3/discover/movie";
+
+  const searchOptions2 = [
+    `with_text_query=${searchTerm}`,
+    `include_adult=false`,
+    `page=${page}`,
+    `region=us`,
+    `original_language=en`,
+    `sort_by=popularity.desc`,
+    `without_genres=16`,
+  ].join("&");
+
+  const searchOptions = [`query=${searchTerm}`, `include_adult=false`, `page=${page}`, "language=en"].join("&");
+
+  const URL = `${endpoint}?${searchOptions}`;
   const options = {
     method: "GET",
     headers: {
@@ -32,6 +47,6 @@ const handler = async (event) => {
       body: JSON.stringify({ msg: error.message }),
     };
   }
-};
+}
 
 module.exports = { handler };
