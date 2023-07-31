@@ -5,6 +5,7 @@ async function handler(event) {
   const endpoint = "https://api.themoviedb.org/3/search/movie";
   const endpoint2 = "https://api.themoviedb.org/3/discover/movie";
 
+  const searchOptions = [`query=${searchTerm}`, `include_adult=false`, `page=${page}`, "language=en"].join("&");
   const searchOptions2 = [
     `with_text_query=${searchTerm}`,
     `include_adult=false`,
@@ -15,9 +16,8 @@ async function handler(event) {
     `without_genres=16`,
   ].join("&");
 
-  const searchOptions = [`query=${searchTerm}`, `include_adult=false`, `page=${page}`, "language=en"].join("&");
-
   const URL = `${endpoint}?${searchOptions}`;
+  const URL2 = `${endpoint2}?${searchOptions2}`;
   const options = {
     method: "GET",
     headers: {
@@ -26,7 +26,7 @@ async function handler(event) {
     },
   };
 
-  const response = await fetch(URL, options);
+  const response = await fetch(URL2, options);
   const data = await response.json();
 
   if (!response.ok) {
