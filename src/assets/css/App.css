@@ -1,4 +1,9 @@
 #root {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 1440px;
+  margin: 10rem;
+  padding: 2rem;
+  box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #f9f7e8;
+  border: 1px solid #f3f3f3;
 }

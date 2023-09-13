@@ -1,16 +1,17 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-// import "../assets/css/App.css";
+import "../assets/css/App.css";
 
-import SearchPage from "./pages/SearchPage";
+import SearchPage from "./Pages/SearchPage";
+import MoviePage from "./Pages/MoviePage";
 
 function App() {
   return (
     <Router>
-      <main className="App">
+      <main>
         <Routes>
           <Route path="/" element={<SearchPage />} />
-          <Route path="/movie/:title-year" element={<SearchPage />} />
+          <Route path="/movie/:movieDetails" element={<MoviePage />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </main>

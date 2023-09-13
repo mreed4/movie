@@ -3,8 +3,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #f9f7e8;
+  background-color: #1b1d1c;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,17 +13,22 @@
   -webkit-text-size-adjust: 100%;
 }
 
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 4.23563rem;
+  font-weight: 700;
+  line-height: normal;
+}
+
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-
-  hr {
-    background-color: #213547;
+    color: #1b1d1c;
+    background-color: #f3f3f3;
   }
 }

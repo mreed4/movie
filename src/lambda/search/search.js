@@ -26,7 +26,7 @@ async function handler(event) {
     },
   };
 
-  const response = await fetch(URL2, options);
+  const response = await fetch(URL, options);
   const data = await response.json();
 
   if (!response.ok) {

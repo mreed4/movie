@@ -5,15 +5,30 @@ const AppContext = createContext();
 const netlify = `/.netlify/functions`;
 
 function AppProvider({ children }) {
-  const [appState, setAppState] = useState({
+  const [searchState, setSearchState] = useState({
     searchTerm: "",
     searchResults: [],
-    movie: {},
     requestToken: "", // Not used yet
     page: 1,
   });
+  const { page } = searchState;
 
-  const { page } = appState;
+  const [movieInfo, setMovieInfo] = useState({});
+  const [nowPlaying, setNowPlaying] = useState({});
+
+  async function getNowPlaying() {
+    const URL = `${netlify}/getNowPlaying`;
+
+    const response = await fetch(URL);
+
+    const data = await response.json();
+
+    console.log(data);
+
+    setNowPlaying(data);
+  }
+
+  /* * */
 
   async function authenticate() {
     // Not used yet
@@ -23,14 +38,14 @@ function AppProvider({ children }) {
 
     console.log(data);
 
-    setAppState((prev) => ({
+    setSearchState((prev) => ({
       ...prev,
       requestToken: data.request_token,
     }));
   }
 
   async function getSearchResults(page) {
-    const { searchTerm, searchResults } = appState;
+    const { searchTerm, searchResults } = searchState;
 
     if (!searchTerm) return;
 
@@ -42,33 +57,31 @@ function AppProvider({ children }) {
 
     console.log(results);
 
-    setAppState((prev) => ({
+    setSearchState((prev) => ({
       ...prev,
       searchResults: results,
     }));
   }
 
-  function getMovieInfo(id) {
+  async function getMovieInfo(id) {
     if (!id) return;
 
-    const URL = `/.netlify/functions/getMovieInfo?movie_id=${id}`;
+    const URL = `/.netlify/functions/getMovieInfo?id=${id}`;
 
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+    const response = await fetch(URL);
+    const data = await response.json();
 
-        setAppState((prev) => ({
-          ...prev,
-          movie: data,
-        }));
-      });
+    console.log(data);
+
+    setMovieInfo(data);
   }
+
+  /* * */
 
   function handleSearchInputChange(event) {
     const { value } = event.target;
 
-    setAppState((prev) => ({
+    setSearchState((prev) => ({
       ...prev,
       searchTerm: value,
     }));
@@ -79,20 +92,30 @@ function AppProvider({ children }) {
 
     getSearchResults(page);
 
-    setAppState((prev) => ({
+    setSearchState((prev) => ({
       ...prev,
       searchTerm: "",
     }));
   }
 
+  /* * */
+
   function toKebabCase(str) {
     return str.toLowerCase().replace(/ /g, "-");
   }
 
-  function nextPage() {
-    const { page } = appState;
+  function alphaNumeric(str) {
+    return str.replace(/[^a-z0-9]/gi, "-").replace(/-+/g, "-");
+  }
 
-    setAppState((prev) => ({
+  function titleCase(str) {
+    return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  }
+
+  function nextPage() {
+    const { page } = searchState;
+
+    setSearchState((prev) => ({
       ...prev,
       page: prev.page + 1,
     }));
@@ -103,11 +126,11 @@ function AppProvider({ children }) {
   }
 
   function prevPage() {
-    const { page } = appState;
+    const { page } = searchState;
 
     if (page === 1) return;
 
-    setAppState((prev) => ({
+    setSearchState((prev) => ({
       ...prev,
       page: prev.page - 1,
     }));
@@ -118,14 +141,21 @@ function AppProvider({ children }) {
   }
 
   const value = {
-    appState,
-    setAppState,
+    searchState,
+    nowPlaying,
+    movieInfo,
+    setSearchState,
+    /* * */
     authenticate,
     getSearchResults,
     getMovieInfo,
+    /* * */
     handleSearchInputChange,
     handleFormSubmit,
+    /* * */
     toKebabCase,
+    alphaNumeric,
+    titleCase,
     nextPage,
     prevPage,
   };

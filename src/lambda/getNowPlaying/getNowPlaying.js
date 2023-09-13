@@ -1,13 +1,12 @@
-async function handler(event) {
+// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
+const handler = async (event) => {
   const TOKEN = process.env.TOKEN;
-  const { id: movie_id } = event.queryStringParameters;
 
-  const endpoint = `https://api.themoviedb.org/3/movie/${movie_id}`;
+  const endpoint = "https://api.themoviedb.org/3/movie/now_playing";
 
-  const searchOptions = [`language=en`].join("&");
+  const searchOptions = [`page=1`, "language=en"].join("&");
 
   const URL = `${endpoint}?${searchOptions}`;
-
   const options = {
     method: "GET",
     headers: {
@@ -17,17 +16,14 @@ async function handler(event) {
   };
 
   const response = await fetch(URL, options);
+  const data = await response.json();
 
   if (!response.ok) {
     return {
       statusCode: response.status,
-      body: response.statusText,
+      body: JSON.stringify(response.statusText),
     };
   }
-
-  const data = await response.json();
-
-  console.log(data);
 
   try {
     return {
@@ -37,9 +33,9 @@ async function handler(event) {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify(error),
+      body: JSON.stringify({ msg: error.message }),
     };
   }
-}
+};
 
 module.exports = { handler };
