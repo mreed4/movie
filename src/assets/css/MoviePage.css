@@ -1,0 +1,52 @@
+#movie-page .movie-poster-and-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.movie-poster {
+  overflow: hidden;
+  width: fit-content;
+  width: 348px;
+  border-radius: 10px;
+}
+
+.movie-info {
+  width: 635px;
+}
+
+.movie-info p {
+  /* width: 99%; */
+  margin-bottom: 24px;
+  text-align: justify;
+}
+
+.movie-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.streaming-links {
+  height: 64px;
+  background-color: var(--teal);
+  padding: 8px 90px;
+  color: var(--white);
+}
+
+.movie-info-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.movie-info-details span {
+  display: block;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: var(--dark-white);
+  margin-right: 24px;
+}

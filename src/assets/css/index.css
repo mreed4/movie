@@ -1,10 +1,18 @@
 :root {
-  font-family: sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 400;
+  font-size: 14px;
+
+  --black: #1b1d1c;
+  --white: #f9f7e8;
+  --dark-white: #efe8d8;
+  --gray: #f3f3f3;
+  --green: #17c47c;
+  --teal: #61bfad;
 
   color-scheme: light dark;
-  color: #f9f7e8;
-  background-color: #1b1d1c;
+  color: var(--white);
+  background-color: var(--black);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,22 +21,23 @@
   -webkit-text-size-adjust: 100%;
 }
 
-h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 4.23563rem;
-  font-weight: 700;
-  line-height: normal;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 67.77px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: #1b1d1c;
-    background-color: #f3f3f3;
+    color: var(--black);
+    background-color: var(--gray);
   }
 }

@@ -14,6 +14,7 @@ function AppProvider({ children }) {
   const { page } = searchState;
 
   const [movieInfo, setMovieInfo] = useState({});
+  const [movieImages, setMovieImages] = useState({});
   const [nowPlaying, setNowPlaying] = useState({});
 
   async function getNowPlaying() {
@@ -74,6 +75,19 @@ function AppProvider({ children }) {
     console.log(data);
 
     setMovieInfo(data);
+  }
+
+  async function getMovieImages(id) {
+    if (!id) return;
+
+    const URL = `/.netlify/functions/getMovieImages?id=${id}`;
+
+    const response = await fetch(URL);
+    const data = await response.json();
+
+    console.log(data);
+
+    setMovieImages(data);
   }
 
   /* * */
@@ -144,11 +158,13 @@ function AppProvider({ children }) {
     searchState,
     nowPlaying,
     movieInfo,
+    movieImages,
     setSearchState,
     /* * */
     authenticate,
     getSearchResults,
     getMovieInfo,
+    getMovieImages,
     /* * */
     handleSearchInputChange,
     handleFormSubmit,

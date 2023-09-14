@@ -18,7 +18,7 @@ export default function SearchPage() {
 
   return (
     <section id="search-page">
-      <h1>Search Page</h1>
+      <h2>Search Page</h2>
       <form onSubmit={handleFormSubmit}>
         <input type="search" placeholder="Search for a movie..." onChange={handleSearchInputChange} value={searchTerm} />
         <button type="submit">Search</button>
@@ -26,14 +26,14 @@ export default function SearchPage() {
       <h2>Results</h2>
       <ul>
         {searchResults.map((movie) => {
-          const { id, original_title, poster_path, release_date, vote_average } = movie;
+          const { id, title, poster_path, release_date, vote_average } = movie;
           return (
             <li key={id}>
-              <Link to={`/movie/${toKebabCase(alphaNumeric(original_title))}-${release_date.slice(0, 4)}`} state={id}>
-                <h3>{original_title}</h3>
+              <Link to={`/movie/${toKebabCase(alphaNumeric(title))}-${release_date.slice(0, 4)}`} state={id}>
+                <h3>{title}</h3>
                 <img
                   src={poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : "https://via.placeholder.com/200x300"}
-                  alt={original_title}
+                  alt={title}
                 />
                 <p>Released: {release_date}</p>
                 <p>Rating: {vote_average}</p>
