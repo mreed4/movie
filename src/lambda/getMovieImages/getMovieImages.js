@@ -28,7 +28,7 @@ async function handler(event) {
 
   const data = await response.json();
 
-  console.log(data);
+  // console.log(data);
 
   try {
     return {

@@ -50,3 +50,32 @@
   background-color: var(--dark-white);
   margin-right: 24px;
 }
+
+.movie-info-credits-cast ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.movie-info-credits-cast img {
+  display: block;
+  object-fit: cover;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--dark-white);
+}
+
+.movie-info-credits-cast span:first-of-type {
+  font-weight: 600;
+}
+
+.movie-info-credits-cast-member {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 24px;
+}

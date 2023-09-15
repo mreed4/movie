@@ -15,7 +15,11 @@ function AppProvider({ children }) {
 
   const [movieInfo, setMovieInfo] = useState({});
   const [movieImages, setMovieImages] = useState({});
+  const [movieCredits, setMovieCredits] = useState({});
+
   const [nowPlaying, setNowPlaying] = useState({});
+
+  /* * */
 
   async function getNowPlaying() {
     const URL = `${netlify}/getNowPlaying`;
@@ -28,8 +32,6 @@ function AppProvider({ children }) {
 
     setNowPlaying(data);
   }
-
-  /* * */
 
   async function authenticate() {
     // Not used yet
@@ -88,6 +90,20 @@ function AppProvider({ children }) {
     console.log(data);
 
     setMovieImages(data);
+  }
+
+  async function getMovieCredits(id) {
+    if (!id) return;
+
+    const URL = `/.netlify/functions/getMovieCredits?id=${id}`;
+
+    const response = await fetch(URL);
+
+    const data = await response.json();
+
+    console.log(data);
+
+    setMovieCredits(data);
   }
 
   /* * */
@@ -159,12 +175,14 @@ function AppProvider({ children }) {
     nowPlaying,
     movieInfo,
     movieImages,
+    movieCredits,
     setSearchState,
     /* * */
     authenticate,
     getSearchResults,
     getMovieInfo,
     getMovieImages,
+    getMovieCredits,
     /* * */
     handleSearchInputChange,
     handleFormSubmit,

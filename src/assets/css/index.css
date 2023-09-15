@@ -27,14 +27,6 @@
   padding: 0;
 }
 
-h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 67.77px;
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 24px;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: var(--black);

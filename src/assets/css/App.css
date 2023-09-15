@@ -14,18 +14,32 @@ p {
   font-weight: 400;
 }
 
+h1 {
+  font-size: 30px;
+  text-transform: lowercase;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 67.77px;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 24px;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
-}
-
-header h1 {
-  font-size: 26px;
-  text-transform: lowercase;
-  font-weight: 600;
-  letter-spacing: -1px;
+  margin-bottom: 48px;
 }
 
 header a {
