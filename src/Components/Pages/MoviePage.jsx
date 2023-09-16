@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../Contexts/AppContext";
 
 import "../../assets/css/MoviePage.css";
 
@@ -15,6 +15,24 @@ export default function MoviePage() {
     getMovieImages(id);
     getMovieCredits(id);
   }, []);
+
+  function rolesByCrewMember() {
+    const rolesByCrewMember = {}; // Initialize an empty object to store crew members and their roles
+    Object.keys(movieCredits).length > 0 && // If movieCredits is not empty
+      movieCredits.crew.forEach((crewMember) => {
+        // For each crew member
+        const { id, name, job } = crewMember; // Destructure the crew member's id, name, and job
+        if (rolesByCrewMember[name]) {
+          // If the crew member's name is already a key in rolesByCrewMember
+          rolesByCrewMember[name].push(job); // Add the crew member's job to the array of jobs for that crew member
+        } else {
+          // If the crew member's name is not already a key in rolesByCrewMember
+          rolesByCrewMember[name] = [job]; // Add the crew member's name as a key in rolesByCrewMember and set its value to an array containing the crew member's job
+        }
+      });
+    // console.log(rolesByCrewMember); // Log the rolesByCrewMember object to the console
+    return rolesByCrewMember; // Return the rolesByCrewMember object
+  }
 
   return (
     <section id="movie-page">
@@ -42,15 +60,15 @@ export default function MoviePage() {
                 <>
                   <div className="movie-info-credits-crew">
                     <ul>
-                      {movieCredits.crew.slice(0, 4).map((crewMember, i) => {
-                        const { id, name, job } = crewMember;
-                        return (
-                          <li key={`${id}-${i}`} className="movie-info-credits-crew-member">
-                            <span>{name}</span>
-                            <span>{job}</span>
-                          </li>
-                        );
-                      })}
+                      {rolesByCrewMember() &&
+                        Object.keys(rolesByCrewMember()).map((crewMember) => {
+                          return (
+                            <li key={crewMember} className="movie-info-credits-crew-member">
+                              <span>{crewMember}</span>
+                              <span>{rolesByCrewMember()[crewMember].join(", ")}</span>
+                            </li>
+                          );
+                        })}
                     </ul>
                   </div>
                   <div className="movie-info-credits-cast">
