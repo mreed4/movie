@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useContext } from "react";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../Contexts/AppContext";
 
 import "../../assets/css/SearchPage.css";
 
@@ -25,10 +25,10 @@ export default function SearchPage() {
       </form>
       <h2>Results</h2>
       <ul>
-        {searchResults.map((movie) => {
+        {searchResults.map((movie, i) => {
           const { id, title, poster_path, release_date, vote_average } = movie;
           return (
-            <li key={id}>
+            <li key={`${id}-${i}`}>
               <Link to={`/movie/${toKebabCase(alphaNumeric(title))}-${release_date.slice(0, 4)}`} state={id}>
                 <h3>{title}</h3>
                 <img

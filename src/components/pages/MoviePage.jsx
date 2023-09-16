@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../Contexts/AppContext";
 
 import "../../assets/css/MoviePage.css";
 
