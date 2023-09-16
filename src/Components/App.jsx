@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 import "../assets/css/App.css";
 
-import SearchPage from "./Pages2/SearchPage";
-import MoviePage from "./Pages2/MoviePage";
+import SearchPage from "./Pages/SearchPage";
+import MoviePage from "./Pages/MoviePage";
 
 function App() {
   return (
