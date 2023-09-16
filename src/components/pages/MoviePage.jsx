@@ -42,10 +42,10 @@ export default function MoviePage() {
                 <>
                   <div className="movie-info-credits-crew">
                     <ul>
-                      {movieCredits.crew.slice(0, 4).map((crewMember) => {
-                        const { id, name, job, profile_path } = crewMember;
+                      {movieCredits.crew.slice(0, 4).map((crewMember, i) => {
+                        const { id, name, job } = crewMember;
                         return (
-                          <li key={id} className="movie-info-credits-crew-member">
+                          <li key={`${id}-${i}`} className="movie-info-credits-crew-member">
                             <span>{name}</span>
                             <span>{job}</span>
                           </li>

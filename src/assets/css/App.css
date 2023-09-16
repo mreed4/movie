@@ -8,6 +8,12 @@
   border: 1px solid var(--white);
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 p {
   font-size: 16px;
   line-height: 24px;
@@ -49,7 +55,6 @@ header a {
 
 header nav ul {
   display: flex;
-  list-style: none;
 }
 
 header nav ul li {
