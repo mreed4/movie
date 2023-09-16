@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useContext } from "react";
-import { AppContext } from "../Contexts/AppContext";
+import { AppContext } from "../AppContext";
 
 import "../../assets/css/SearchPage.css";
 
