@@ -1,12 +1,12 @@
 #root {
   /* min-width: 1024px; */
   width: 1440px;
-  margin: 10rem;
+  margin: 2rem auto;
   padding: 24px 165px 77px;
-  box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background-color: var(--white);
-  border: 1px solid var(--white);
+  /* box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.1); */
+  /* border-radius: 10px; */
+  /* background-color: var(--white); */
+  /* border: 1px solid var(--white); */
 }
 
 ul {

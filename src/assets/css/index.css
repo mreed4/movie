@@ -5,6 +5,7 @@
 
   --black: #1b1d1c;
   --white: #f9f7e8;
+  --white-dim: hsla(52.9, 58.6%, 94.3%, 0.4);
   --dark-white: #efe8d8;
   --gray: #f3f3f3;
   --green: #17c47c;
@@ -31,6 +32,6 @@
 @media (prefers-color-scheme: light) {
   :root {
     color: var(--black);
-    background-color: var(--gray);
+    background-color: var(--white);
   }
 }

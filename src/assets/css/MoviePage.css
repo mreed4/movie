@@ -6,14 +6,17 @@
 }
 
 .movie-poster {
-  overflow: hidden;
   width: fit-content;
   width: 348px;
-  border-radius: 10px;
+  position: relative;
 }
 
 .movie-info {
   width: 635px;
+}
+
+.movie-info h2 {
+  margin-top: -24px;
 }
 
 .movie-info p {
@@ -26,6 +29,20 @@
   display: block;
   width: 100%;
   height: auto;
+  object-fit: cover;
+}
+
+.movie-poster img.blur {
+  filter: blur(32px) saturate(300%);
+}
+
+.movie-poster img.poster {
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  /* border: 1px solid var(--white-dim); */
 }
 
 .streaming-links {
@@ -104,6 +121,7 @@
   justify-content: center;
   align-items: center;
   margin-right: 48px;
+  width: 96px;
 }
 
 .movie-info-credits-crew-member span:first-child {
@@ -115,17 +133,19 @@
   border-top: 2px solid var(--dark-white);
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
 }
 
 .movie-info-credits-cast img {
   display: block;
   object-fit: cover;
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   border: 2px solid var(--dark-white);
+  margin-bottom: 8px;
+  filter: grayscale(80%) contrast(120%) brightness(90%) opacity(80%);
 }
 
 .movie-info-credits-cast span:first-of-type {
@@ -138,8 +158,18 @@
   justify-content: center;
   align-items: center;
   margin-right: 48px;
+  width: 96px;
 }
 
 .movie-info-credits-cast-member:last-of-type {
   margin-right: 0;
+}
+
+.truncate {
+  display: block;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
