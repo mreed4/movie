@@ -23,6 +23,7 @@ function AppProvider({ children }) {
   const [movieIMDBRating, setMovieIMDBRating] = useState({});
   const [movieVideos, setMovieVideos] = useState({});
   const [movieProviders, setMovieProviders] = useState({});
+  const [movieSimilar, setMovieSimilar] = useState({});
 
   /* * */
 
@@ -156,6 +157,20 @@ function AppProvider({ children }) {
     setMovieProviders(data);
   }
 
+  async function getMovieSimilar(id) {
+    if (!id) return;
+
+    const URL = `${netlify}/getMovieSimilar?id=${id}`;
+
+    const response = await fetch(URL);
+
+    const data = await response.json();
+
+    console.log(data);
+
+    setMovieSimilar(data);
+  }
+
   /* * */
 
   function handleSearchInputChange(event) {
@@ -229,6 +244,8 @@ function AppProvider({ children }) {
     movieIMDBRating,
     movieVideos,
     movieProviders,
+    movieSimilar,
+    /* * */
     setSearchState,
     /* * */
     authenticate,
@@ -240,6 +257,7 @@ function AppProvider({ children }) {
     getMovieIMDBRating,
     getMovieVideos,
     getMovieProviders,
+    getMovieSimilar,
     /* * */
     handleSearchInputChange,
     handleFormSubmit,

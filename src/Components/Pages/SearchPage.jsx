@@ -26,17 +26,14 @@ export default function SearchPage() {
       <h2>Results</h2>
       <ul>
         {searchResults.map((movie, i) => {
-          const { id, title, poster_path, release_date, vote_average } = movie;
+          const { id, title, poster_path, release_date } = movie;
           return (
             <li key={`${id}-${i}`}>
               <Link to={`/movie/${toKebabCase(alphaNumeric(title))}-${release_date.slice(0, 4)}`} state={id}>
-                {/* <h3>{title}</h3> */}
                 <img
                   src={poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : "https://via.placeholder.com/200x300"}
                   alt={title}
                 />
-                {/* <p>Released: {release_date}</p> */}
-                {/* <p>Rating: {vote_average}</p> */}
               </Link>
             </li>
           );

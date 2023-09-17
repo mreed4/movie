@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import "../assets/css/App.css";
 
@@ -11,14 +11,16 @@ function App() {
   return (
     <Router>
       <header>
-        <h1>Fink</h1>
+        <Link to="/">
+          <h1>Fink</h1>
+        </Link>
         <nav>
           <ul>
             <li>
-              <Link to="/movies">Movies</Link>
+              <NavLink to="/">Movies</NavLink>
             </li>
             <li>
-              <Link to="/shows">Shows</Link>
+              <NavLink to="/shows">Shows</NavLink>
             </li>
           </ul>
         </nav>
@@ -26,7 +28,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<StartPage />} />
-          <Route path="/movies" element={<h2>Movies</h2>} />
+          {/* <Route path="/movies" element={<StartPage />} /> */}
           <Route path="/movie/:movieDetails" element={<MoviePage />} />
           <Route path="/shows" element={<h2>Shows</h2>} />
           <Route path="*" element={<h1>Not Found</h1>} />

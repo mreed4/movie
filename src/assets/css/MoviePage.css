@@ -99,7 +99,7 @@
 }
 
 .movie-info-watch-providers {
-  margin-top: 32px;
+  margin-top: 6em;
 }
 
 .movie-info-watch-providers ul {
@@ -111,15 +111,17 @@
   align-items: center;
 }
 
+.movie-info-watch-provider {
+  width: calc(100% / 6);
+  margin: 0 8px 16px 0;
+}
+
 .movie-info-watch-provider img {
   display: block;
-  width: 64px;
-  height: 64px;
+  width: 100%;
   object-fit: cover;
   border-radius: 10px;
-  margin: 4px;
-  border: 2px solid var(--dark-white);
-  box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6); */
   filter: grayscale(90%) contrast(120%) brightness(90%) opacity(80%);
 }
 
@@ -183,6 +185,40 @@
 
 .movie-info-credits-cast-member:last-of-type {
   margin-right: 0;
+}
+
+.movie-info-similar {
+  margin-top: 6em;
+}
+
+.movie-info-similar ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.movie-info-similar-movie {
+  margin-right: 16px;
+}
+
+.movie-info-similar-movie img {
+  display: block;
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  /* border: 1px solid var(--dark-white); */
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+  filter: grayscale(100%) contrast(120%) brightness(90%) opacity(30%);
+  transition: filter 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.movie-info-similar-movie img:hover {
+  filter: none;
+  transform: scale(1.05);
 }
 
 .just-watch {

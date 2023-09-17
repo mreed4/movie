@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useContext, useMemo, useEffect } from "react";
 import { AppContext } from "../Contexts/AppContext";
 
@@ -34,6 +34,8 @@ function MovieDetails() {
 
   const hasTrailer = movieVideos.results?.length > 0;
   const hasGenres = movieInfo.genres?.length > 0;
+  const hasReleaseDate = movieInfo.release_date?.length > 0;
+  const hasRuntime = movieInfo.runtime !== 0;
 
   function MovieReleaseDate() {
     return <span>{movieInfo.release_date?.slice(0, 4)}</span>;
@@ -84,9 +86,9 @@ function MovieDetails() {
   return (
     <div className="movie-info-details">
       <MovieIMDB />
-      <MovieReleaseDate />
+      {hasReleaseDate && <MovieReleaseDate />}
       {hasGenres && <MovieGenres />}
-      <MovieRuntime />
+      {hasRuntime && <MovieRuntime />}
       {hasTrailer && <MovieTrailerLink />}
     </div>
   );
@@ -197,7 +199,7 @@ function MovieCredits() {
 
   return (
     <div className="movie-info-credits">
-      <h3>Credits</h3>
+      {/* <h3>Credits</h3> */}
       <MovieCrew />
       <MovieCast />
     </div>
@@ -238,8 +240,37 @@ function MovieWatch() {
   );
 }
 
+function MovieSimilar() {
+  const { movieSimilar, toKebabCase, alphaNumeric } = useContext(AppContext);
+
+  const hasSimilar = movieSimilar.results?.length > 0;
+
+  if (!hasSimilar) return null;
+
+  return (
+    <div className="movie-info-similar">
+      <h3>Similar</h3>
+      <ul>
+        {movieSimilar.results.slice(0, 6).map((movie) => {
+          const { id, title, poster_path, release_date } = movie;
+          return (
+            <li key={id} className="movie-info-similar-movie">
+              <Link to={`/movie/${toKebabCase(alphaNumeric(title))}-${release_date.slice(0, 4)}`} state={id}>
+                <img
+                  src={poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : "https://via.placeholder.com/200x300"}
+                  alt={title}
+                />
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
 export default function MoviePage() {
-  const { getMovieInfo, getMovieImages, getMovieCredits, getMovieVideos, getMovieProviders } = useContext(AppContext);
+  const { getMovieInfo, getMovieImages, getMovieCredits, getMovieVideos, getMovieProviders, getMovieSimilar } = useContext(AppContext);
   const location = useLocation();
   const id = location.state;
 
@@ -249,6 +280,7 @@ export default function MoviePage() {
     getMovieCredits(id);
     getMovieVideos(id);
     getMovieProviders(id);
+    getMovieSimilar(id);
   }, [id]);
 
   return (
@@ -260,6 +292,7 @@ export default function MoviePage() {
           <MovieDetails />
           <MovieOverview />
           <MovieCredits />
+          <MovieSimilar />
         </div>
       </div>
     </section>
