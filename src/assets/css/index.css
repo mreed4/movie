@@ -13,8 +13,8 @@
   --red: #e54b4b;
 
   color-scheme: light dark;
-  color: var(--white);
-  background-color: var(--black);
+  color: var(--black);
+  background-color: var(--white);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -29,9 +29,9 @@
   padding: 0;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    color: var(--black);
-    background-color: var(--white);
+    color: var(--white);
+    background-color: var(--black);
   }
 }

@@ -5,38 +5,23 @@
   align-items: flex-start;
 }
 
-.movie-poster {
-  width: fit-content;
+.movie-poster-and-rating > div {
   width: 348px;
   position: relative;
 }
 
-.movie-info {
-  width: 635px;
-}
-
-.movie-info h2 {
-  margin-top: -24px;
-}
-
-.movie-info p {
-  /* width: 99%; */
-  margin-bottom: 24px;
-  text-align: justify;
-}
-
-.movie-poster img {
+.movie-poster-and-rating img {
   display: block;
   width: 100%;
   height: auto;
   object-fit: cover;
 }
 
-.movie-poster img.blur {
+.movie-poster-and-rating img.blur {
   filter: blur(32px) saturate(300%);
 }
 
-.movie-poster img.poster {
+.movie-poster-and-rating img.poster {
   border-radius: 10px;
   position: absolute;
   top: 0;
@@ -45,11 +30,18 @@
   /* border: 1px solid var(--white-dim); */
 }
 
-.streaming-links {
-  height: 64px;
-  background-color: var(--teal);
-  padding: 8px 90px;
-  color: var(--white);
+.movie-info {
+  max-width: 960px;
+}
+
+.movie-info h2 {
+  margin-top: -18px;
+}
+
+.movie-info p {
+  /* width: 99%; */
+  margin-bottom: 24px;
+  text-align: justify;
 }
 
 .movie-info-details {
@@ -83,12 +75,16 @@
   margin-right: 8px;
 }
 
+.movie-rating-and-streaming {
+  margin-top: 48px;
+}
+
 .movie-info-imdb-rating {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 24px;
+  margin: 32px 0;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -103,12 +99,37 @@
   font-weight: 500;
 }
 
+.movie-info-watch-providers {
+  margin-top: 32px;
+}
+
+.movie-info-watch-providers ul {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.movie-info-watch-provider img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 4px;
+  border: 2px solid var(--dark-white);
+  box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.1);
+  filter: grayscale(90%) contrast(120%) brightness(90%) opacity(80%);
+}
+
 .movie-info-credits-crew ul {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 24px;
+  margin: 24px 0;
 }
 
 .movie-info-credits-crew span:first-of-type {
@@ -121,7 +142,7 @@
   justify-content: center;
   align-items: center;
   margin-right: 48px;
-  width: 96px;
+  width: 112px;
 }
 
 .movie-info-credits-crew-member span:first-child {
@@ -172,4 +193,27 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.just-watch {
+  display: block;
+  margin-top: 8px;
+  opacity: 0.2;
+}
+
+@media (prefers-color-scheme: dark) {
+  .movie-info-details > span,
+  .movie-info-details > a {
+    background-color: transparent;
+    border: 1px solid var(--white-dim);
+  }
+
+  .movie-info-credits-cast img {
+    border: 2px solid var(--white-dim);
+    filter: grayscale(90%) contrast(120%) brightness(80%) opacity(80%);
+  }
+
+  .movie-info-credits-cast ul {
+    border-top: 2px solid var(--white-dim);
+  }
 }

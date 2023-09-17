@@ -7,17 +7,21 @@ import "../../assets/css/MoviePage.css";
 import IMDB from "../Content/IMDB";
 import RedPlayButton from "../Content/RedPlayButton";
 
-function MoviePoster() {
+function MoviePosterRatingWatch() {
   const { movieInfo } = useContext(AppContext);
 
   return (
-    <div className="movie-poster">
-      <div>
+    <aside className="movie-poster-and-rating">
+      <div className="movie-poster">
         <img src={`https://image.tmdb.org/t/p/w400${movieInfo.poster_path}`} alt={movieInfo.title} className="blur" />
         <img src={`https://image.tmdb.org/t/p/w400${movieInfo.poster_path}`} alt={movieInfo.title} className="poster" />
       </div>
-      {/* <div className="streaming-links">Netflix</div> */}
-    </div>
+      <div className="movie-rating-and-streaming">
+        {/* <h3>Rating</h3> */}
+        <MovieIMDB />
+        <MovieWatch />
+      </div>
+    </aside>
   );
 }
 
@@ -130,7 +134,7 @@ function MovieCredits() {
       const rolesByCrewMember = {}; // Initialize an empty object to store crew members and their roles
       Object.keys(movieCredits).length > 0 && // If movieCredits is not empty
         movieCredits.crew
-          .filter((crewMember) => ["Director", "Writer"].includes(crewMember.job))
+          .filter((crewMember) => ["Director", "Writer"].includes(crewMember.job)) // Filter the crew members to only include directors and writers
           .forEach((crewMember) => {
             // For each crew member
             const { id, name, job } = crewMember; // Destructure the crew member's id, name, and job
@@ -181,7 +185,9 @@ function MovieCredits() {
                 <span className="truncate" title={name}>
                   {name}
                 </span>
-                <span className="truncate">{character}</span>
+                <span className="truncate" title={character}>
+                  {character}
+                </span>
               </li>
             );
           })}
@@ -192,14 +198,49 @@ function MovieCredits() {
 
   return (
     <div className="movie-info-credits">
+      <h3>Credits</h3>
       <MovieCrew />
       <MovieCast />
     </div>
   );
 }
 
+function MovieWatch() {
+  const { movieProviders } = useContext(AppContext);
+
+  function MovieProviders() {
+    const hasProviders = movieProviders.results?.US?.flatrate?.length > 0;
+
+    if (!hasProviders) return null;
+
+    return (
+      <div className="movie-info-watch-providers">
+        <ul>
+          {movieProviders.results.US.flatrate.map((provider) => {
+            const { provider_id, provider_name, logo_path } = provider;
+            return (
+              <li key={provider_id} className="movie-info-watch-provider">
+                <img src={`https://image.tmdb.org/t/p/w200${logo_path}`} alt={provider_name} />
+              </li>
+            );
+          })}
+        </ul>
+
+        <span className="just-watch">Powered by JustWatch</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="movie-info-watch">
+      {/* <h3>Watch</h3> */}
+      <MovieProviders />
+    </div>
+  );
+}
+
 export default function MoviePage() {
-  const { getMovieInfo, getMovieImages, getMovieCredits, getMovieVideos } = useContext(AppContext);
+  const { getMovieInfo, getMovieImages, getMovieCredits, getMovieVideos, getMovieProviders } = useContext(AppContext);
   const location = useLocation();
   const id = location.state;
 
@@ -208,16 +249,16 @@ export default function MoviePage() {
     getMovieImages(id);
     getMovieCredits(id);
     getMovieVideos(id);
+    getMovieProviders(id);
   }, [id]);
 
   return (
     <section id="movie-page">
       <div className="movie-poster-and-info">
-        <MoviePoster />
+        <MoviePosterRatingWatch />
         <div className="movie-info">
           <MovieTitle />
           <MovieDetails />
-          <MovieIMDB />
           <MovieOverview />
           <MovieCredits />
         </div>

@@ -22,6 +22,7 @@ function AppProvider({ children }) {
   const [movieCredits, setMovieCredits] = useState({});
   const [movieIMDBRating, setMovieIMDBRating] = useState({});
   const [movieVideos, setMovieVideos] = useState({});
+  const [movieProviders, setMovieProviders] = useState({});
 
   /* * */
 
@@ -141,6 +142,20 @@ function AppProvider({ children }) {
     setMovieVideos(data);
   }
 
+  async function getMovieProviders(id) {
+    if (!id) return;
+
+    const URL = `${netlify}/getMovieProviders?id=${id}`;
+
+    const response = await fetch(URL);
+
+    const data = await response.json();
+
+    console.log(data);
+
+    setMovieProviders(data);
+  }
+
   /* * */
 
   function handleSearchInputChange(event) {
@@ -213,6 +228,7 @@ function AppProvider({ children }) {
     movieCredits,
     movieIMDBRating,
     movieVideos,
+    movieProviders,
     setSearchState,
     /* * */
     authenticate,
@@ -223,6 +239,7 @@ function AppProvider({ children }) {
     getMovieCredits,
     getMovieIMDBRating,
     getMovieVideos,
+    getMovieProviders,
     /* * */
     handleSearchInputChange,
     handleFormSubmit,
