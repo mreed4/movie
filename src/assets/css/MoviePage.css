@@ -43,7 +43,8 @@
   margin-bottom: 24px;
 }
 
-.movie-info-details span {
+.movie-info-details > span,
+.movie-info-details > a {
   display: block;
   padding: 8px;
   border-radius: 10px;
@@ -51,12 +52,71 @@
   margin-right: 24px;
 }
 
-.movie-info-credits-cast ul {
+.movie-info-details a {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--red);
+  font-weight: 600;
+}
+
+.movie-info-details a svg {
+  margin-right: 8px;
+}
+
+.movie-info-imdb-rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 24px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.movie-info-imdb-rating svg {
+  margin-right: 8px;
+}
+
+.movie-info-imdb-rating span:first-of-type {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.movie-info-credits-crew ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.movie-info-credits-crew span:first-of-type {
+  font-weight: 600;
+}
+
+.movie-info-credits-crew-member {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 48px;
+}
+
+.movie-info-credits-crew-member span:first-child {
+  margin-bottom: 8px;
+}
+
+.movie-info-credits-cast ul {
+  padding-top: 24px;
+  border-top: 2px solid var(--dark-white);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .movie-info-credits-cast img {
@@ -77,13 +137,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 24px;
+  margin-right: 48px;
 }
 
-.movie-info-credits-crew ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
+.movie-info-credits-cast-member:last-of-type {
+  margin-right: 0;
 }

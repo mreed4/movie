@@ -9,6 +9,7 @@
   --gray: #f3f3f3;
   --green: #17c47c;
   --teal: #61bfad;
+  --red: #e54b4b;
 
   color-scheme: light dark;
   color: var(--white);

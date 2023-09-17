@@ -1,4 +1,3 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 async function handler(event) {
   const TOKEN = process.env.TOKEN;
   const { id: movie_id } = event.queryStringParameters;

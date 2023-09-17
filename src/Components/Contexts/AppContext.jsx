@@ -13,11 +13,15 @@ function AppProvider({ children }) {
   });
   const { page } = searchState;
 
+  const [nowPlaying, setNowPlaying] = useState({});
+
+  /* * */
+
   const [movieInfo, setMovieInfo] = useState({});
   const [movieImages, setMovieImages] = useState({});
   const [movieCredits, setMovieCredits] = useState({});
-
-  const [nowPlaying, setNowPlaying] = useState({});
+  const [movieIMDBRating, setMovieIMDBRating] = useState({});
+  const [movieVideos, setMovieVideos] = useState({});
 
   /* * */
 
@@ -58,7 +62,7 @@ function AppProvider({ children }) {
     const data = await response.json();
     const { results } = data;
 
-    console.log(results);
+    // console.log(results);
 
     setSearchState((prev) => ({
       ...prev,
@@ -69,12 +73,12 @@ function AppProvider({ children }) {
   async function getMovieInfo(id) {
     if (!id) return;
 
-    const URL = `/.netlify/functions/getMovieInfo?id=${id}`;
+    const URL = `${netlify}/getMovieInfo?id=${id}`;
 
     const response = await fetch(URL);
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
     setMovieInfo(data);
   }
@@ -82,12 +86,12 @@ function AppProvider({ children }) {
   async function getMovieImages(id) {
     if (!id) return;
 
-    const URL = `/.netlify/functions/getMovieImages?id=${id}`;
+    const URL = `${netlify}/getMovieImages?id=${id}`;
 
     const response = await fetch(URL);
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
     setMovieImages(data);
   }
@@ -95,7 +99,38 @@ function AppProvider({ children }) {
   async function getMovieCredits(id) {
     if (!id) return;
 
-    const URL = `/.netlify/functions/getMovieCredits?id=${id}`;
+    const URL = `${netlify}/getMovieCredits?id=${id}`;
+
+    const response = await fetch(URL);
+
+    const data = await response.json();
+
+    // console.log(data);
+
+    setMovieCredits(data);
+  }
+
+  async function getMovieIMDBRating(imdb_id) {
+    if (!imdb_id) return;
+
+    const URL = `${netlify}/getMovieIMDBRating?imdb_id=${imdb_id}`;
+
+    const response = await fetch(URL);
+
+    const data = await response.json();
+
+    // console.log(data.imdbRating, data);
+
+    setMovieIMDBRating((prev) => ({
+      ...prev,
+      imdbRating: data.imdbRating,
+    }));
+  }
+
+  async function getMovieVideos(id) {
+    if (!id) return;
+
+    const URL = `${netlify}/getMovieVideos?id=${id}`;
 
     const response = await fetch(URL);
 
@@ -103,7 +138,7 @@ function AppProvider({ children }) {
 
     console.log(data);
 
-    setMovieCredits(data);
+    setMovieVideos(data);
   }
 
   /* * */
@@ -176,13 +211,18 @@ function AppProvider({ children }) {
     movieInfo,
     movieImages,
     movieCredits,
+    movieIMDBRating,
+    movieVideos,
     setSearchState,
     /* * */
     authenticate,
+    getNowPlaying,
     getSearchResults,
     getMovieInfo,
     getMovieImages,
     getMovieCredits,
+    getMovieIMDBRating,
+    getMovieVideos,
     /* * */
     handleSearchInputChange,
     handleFormSubmit,

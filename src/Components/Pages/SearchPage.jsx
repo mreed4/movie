@@ -30,13 +30,13 @@ export default function SearchPage() {
           return (
             <li key={`${id}-${i}`}>
               <Link to={`/movie/${toKebabCase(alphaNumeric(title))}-${release_date.slice(0, 4)}`} state={id}>
-                <h3>{title}</h3>
+                {/* <h3>{title}</h3> */}
                 <img
                   src={poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : "https://via.placeholder.com/200x300"}
                   alt={title}
                 />
-                <p>Released: {release_date}</p>
-                <p>Rating: {vote_average}</p>
+                {/* <p>Released: {release_date}</p> */}
+                {/* <p>Rating: {vote_average}</p> */}
               </Link>
             </li>
           );
