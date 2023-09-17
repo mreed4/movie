@@ -7,7 +7,7 @@ import "../../assets/css/MoviePage.css";
 import IMDB from "../Content/IMDB";
 import RedPlayButton from "../Content/RedPlayButton";
 
-function MoviePosterRatingWatch() {
+function MoviePosterWatch() {
   const { movieInfo } = useContext(AppContext);
 
   return (
@@ -16,9 +16,7 @@ function MoviePosterRatingWatch() {
         <img src={`https://image.tmdb.org/t/p/w400${movieInfo.poster_path}`} alt={movieInfo.title} className="blur" />
         <img src={`https://image.tmdb.org/t/p/w400${movieInfo.poster_path}`} alt={movieInfo.title} className="poster" />
       </div>
-      <div className="movie-rating-and-streaming">
-        {/* <h3>Rating</h3> */}
-        <MovieIMDB />
+      <div className="movie-watch">
         <MovieWatch />
       </div>
     </aside>
@@ -85,6 +83,7 @@ function MovieDetails() {
 
   return (
     <div className="movie-info-details">
+      <MovieIMDB />
       <MovieReleaseDate />
       {hasGenres && <MovieGenres />}
       <MovieRuntime />
@@ -255,7 +254,7 @@ export default function MoviePage() {
   return (
     <section id="movie-page">
       <div className="movie-poster-and-info">
-        <MoviePosterRatingWatch />
+        <MoviePosterWatch />
         <div className="movie-info">
           <MovieTitle />
           <MovieDetails />

@@ -5,6 +5,7 @@ import "../assets/css/App.css";
 
 import SearchPage from "./Pages/SearchPage";
 import MoviePage from "./Pages/MoviePage";
+import StartPage from "./Pages/StartPage";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<SearchPage />} />
+          <Route path="/" element={<StartPage />} />
           <Route path="/movies" element={<h2>Movies</h2>} />
           <Route path="/movie/:movieDetails" element={<MoviePage />} />
           <Route path="/shows" element={<h2>Shows</h2>} />

@@ -1,0 +1,36 @@
+#start-page h2 {
+  /* color: var(--dark-white); */
+}
+
+.movies-now-playing {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-x: hidden;
+  padding: 16px 0;
+}
+
+.movie-now-playing {
+  flex: 1 0 25%;
+  padding: 0 8px;
+}
+
+.movies-now-playing img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+}
+
+.movie-now-playing a {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+}

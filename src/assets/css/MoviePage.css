@@ -1,8 +1,13 @@
-#movie-page .movie-poster-and-info {
+.movie-poster-and-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
+  /* padding: 0 165px; */
+}
+
+.movie-poster-and-rating {
+  margin-right: 128px;
 }
 
 .movie-poster-and-rating > div {
@@ -29,19 +34,13 @@
   z-index: 2;
   /* border: 1px solid var(--white-dim); */
 }
-
-.movie-info {
-  max-width: 960px;
-}
-
 .movie-info h2 {
   margin-top: -18px;
 }
 
 .movie-info p {
-  /* width: 99%; */
-  margin-bottom: 24px;
-  text-align: justify;
+  margin-bottom: 3em;
+  /* width: 65ch; */
 }
 
 .movie-info-details {
@@ -49,7 +48,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 24px;
+  margin: 3em 0;
 }
 
 .movie-info-details > span,
@@ -75,7 +74,7 @@
   margin-right: 8px;
 }
 
-.movie-rating-and-streaming {
+.movie-watch {
   margin-top: 48px;
 }
 
@@ -84,7 +83,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin: 32px 0;
+  margin-right: 48px;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -154,7 +153,7 @@
   border-top: 2px solid var(--dark-white);
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -184,15 +183,6 @@
 
 .movie-info-credits-cast-member:last-of-type {
   margin-right: 0;
-}
-
-.truncate {
-  display: block;
-  width: 100%;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .just-watch {
