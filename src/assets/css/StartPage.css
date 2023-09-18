@@ -17,15 +17,6 @@
   padding: 0 8px;
 }
 
-.movies-now-playing img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
-}
-
 .movie-now-playing a {
   display: flex;
   flex-direction: column;
@@ -33,6 +24,22 @@
   align-items: flex-start;
   text-decoration: none;
   color: inherit;
+}
+
+.movie-now-playing img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+  filter: brightness(75%) opacity(0.95);
+  transition: filter 400ms ease-in-out, transform 200ms ease-in-out;
+}
+
+.movie-now-playing img:hover {
+  filter: none;
+  transform: scale(1.025);
 }
 
 @media (max-width: 768px) {
