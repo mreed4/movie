@@ -1,6 +1,6 @@
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
-  const TOKEN = process.env.TOKEN;
+  const TMDB_KEY = process.env.TMDB_KEY;
 
   const endpoint = "https://api.themoviedb.org/3/movie/now_playing";
 
@@ -11,7 +11,7 @@ const handler = async (event) => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${TMDB_KEY}`,
     },
   };
 

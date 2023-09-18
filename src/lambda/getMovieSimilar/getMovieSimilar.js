@@ -1,5 +1,5 @@
 async function handler(event) {
-  const TOKEN = process.env.TOKEN;
+  const TMDB_KEY = process.env.TMDB_KEY;
 
   const { id: movie_id } = event.queryStringParameters;
 
@@ -13,7 +13,7 @@ async function handler(event) {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${TMDB_KEY}`,
     },
   };
 

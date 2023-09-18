@@ -1,12 +1,12 @@
 const handler = async (event) => {
-  const TOKEN = process.env.TOKEN;
+  const TMDB_KEY = process.env.TMDB_KEY;
 
   const url = "https://api.themoviedb.org/3/authentication/token/new";
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${TMDB_KEY}`,
     },
   };
 

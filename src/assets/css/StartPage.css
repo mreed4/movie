@@ -1,5 +1,5 @@
 #start-page h2 {
-  /* color: var(--dark-white); */
+  font-size: 48px;
 }
 
 .movies-now-playing {
@@ -9,6 +9,7 @@
   align-items: flex-start;
   overflow-x: hidden;
   padding: 16px 0;
+  /* flex-wrap: wrap; */
 }
 
 .movie-now-playing {
@@ -19,9 +20,8 @@
 .movies-now-playing img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
-  margin-bottom: 16px;
   border-radius: 10px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
 }
@@ -33,4 +33,19 @@
   align-items: flex-start;
   text-decoration: none;
   color: inherit;
+}
+
+@media (max-width: 768px) {
+  .movies-now-playing {
+    flex-wrap: wrap;
+  }
+
+  .movie-now-playing {
+    flex: 1 1 50%;
+    margin: 0 0 16px 0;
+  }
+
+  .movies-now-playing img {
+    /* height: 200px; */
+  }
 }

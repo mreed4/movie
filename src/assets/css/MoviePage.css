@@ -3,7 +3,6 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  /* padding: 0 165px; */
 }
 
 .movie-poster-and-rating {
@@ -34,6 +33,7 @@
   z-index: 2;
   /* border: 1px solid var(--white-dim); */
 }
+
 .movie-info h2 {
   margin-top: -18px;
 }
@@ -51,8 +51,15 @@
   margin: 3em 0;
 }
 
-.movie-info-details > span,
-.movie-info-details > a {
+.movie-info-metadata {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.movie-info-metadata span,
+.movie-info-trailer-link {
   display: block;
   padding: 8px;
   border-radius: 10px;
@@ -60,7 +67,7 @@
   margin-right: 24px;
 }
 
-.movie-info-details a {
+.movie-info-trailer-link {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -70,7 +77,7 @@
   font-weight: 600;
 }
 
-.movie-info-details a svg {
+.movie-info-trailer-link svg {
   margin-right: 8px;
 }
 
@@ -128,6 +135,7 @@
 .movie-info-credits-crew ul {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
   margin: 24px 0;
@@ -154,6 +162,7 @@
   padding-top: 24px;
   border-top: 2px solid var(--dark-white);
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -201,13 +210,13 @@
 }
 
 .movie-info-similar-movie {
-  margin-right: 16px;
+  margin: 0 16px 16px 0;
 }
 
 .movie-info-similar-movie img {
   display: block;
   height: 200px;
-  width: 100%;
+  width: auto;
   object-fit: cover;
   border-radius: 10px;
   /* border: 1px solid var(--dark-white); */
@@ -228,7 +237,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .movie-info-details > span,
+  .movie-info-metadata span,
   .movie-info-details > a {
     background-color: transparent;
     border: 1px solid var(--white-dim);
@@ -241,5 +250,115 @@
 
   .movie-info-credits-cast ul {
     border-top: 2px solid var(--white-dim);
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-poster-and-info {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .movie-poster-and-rating {
+    margin-right: 0;
+  }
+
+  .movie-info h2 {
+    text-align: center;
+    font-size: 48px;
+  }
+
+  .movie-poster-and-rating > div {
+    width: 300px;
+    margin-bottom: 24px;
+  }
+
+  .movie-info-imdb-rating {
+    justify-content: center;
+    margin-right: 0;
+  }
+
+  .movie-info-details {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 24px 0;
+  }
+
+  .movie-info-metadata {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .movie-info-metadata span {
+    margin: 0 8px 8px 0;
+  }
+
+  .movie-info-details > div:first-of-type {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .movie-info-trailer-link {
+    margin: 24px auto;
+  }
+
+  .movie-info-watch-providers {
+    margin-top: 3em;
+  }
+
+  .movie-info-watch-providers ul {
+    justify-content: center;
+  }
+
+  .movie-info-watch-provider {
+    width: calc(100% / 4);
+    margin: 0 8px 16px 0;
+  }
+
+  .movie-info-credits-crew ul {
+    justify-content: center;
+  }
+
+  .movie-info-credits-crew-member {
+    margin: 0;
+  }
+
+  .movie-info-credits-cast ul {
+    justify-content: center;
+  }
+
+  .movie-info-credits-cast-member {
+    margin: 24px 8px;
+    flex: 1 1 calc(50% - 24px);
+  }
+
+  .movie-info-similar {
+    margin-top: 3em;
+  }
+
+  .movie-info-similar ul {
+    justify-content: center;
+  }
+
+  .movie-info-similar-movie {
+    width: calc(50% - 16px);
+    margin: 0 8px 8px 0;
+  }
+
+  .movie-info-similar-movie img {
+    width: 100%;
+    height: auto;
+  }
+
+  .movie-info-similar-movie img:hover {
+    transform: none;
   }
 }

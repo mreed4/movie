@@ -18,7 +18,7 @@ export default function StartPage() {
       movies.scrollLeft = 0;
       return;
     }
-    movies.scrollLeft += 360 * 4;
+    movies.scrollLeft += 346 * 4;
   }
 
   return (

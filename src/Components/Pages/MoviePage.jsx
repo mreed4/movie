@@ -76,7 +76,11 @@ function MovieDetails() {
 
   function MovieTrailerLink() {
     return (
-      <a href={`https://www.youtube.com/watch?v=${movieVideos.results[0].key}`} target="_blank" rel="noreferrer">
+      <a
+        href={`https://www.youtube.com/watch?v=${movieVideos.results[0].key}`}
+        target="_blank"
+        rel="noreferrer"
+        className="movie-info-trailer-link">
         <RedPlayButton />
         <span>Play Trailer</span>
       </a>
@@ -86,9 +90,11 @@ function MovieDetails() {
   return (
     <div className="movie-info-details">
       <MovieIMDB />
-      {hasReleaseDate && <MovieReleaseDate />}
-      {hasGenres && <MovieGenres />}
-      {hasRuntime && <MovieRuntime />}
+      <div className="movie-info-metadata">
+        {hasReleaseDate && <MovieReleaseDate />}
+        {hasGenres && <MovieGenres />}
+        {hasRuntime && <MovieRuntime />}
+      </div>
       {hasTrailer && <MovieTrailerLink />}
     </div>
   );
@@ -199,7 +205,6 @@ function MovieCredits() {
 
   return (
     <div className="movie-info-credits">
-      {/* <h3>Credits</h3> */}
       <MovieCrew />
       <MovieCast />
     </div>
