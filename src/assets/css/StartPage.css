@@ -56,7 +56,8 @@
     margin: 0 0 16px 0;
   }
 
-  .movies-now-playing img {
-    /* height: 200px; */
+  .movie-now-playing img {
+    filter: none;
+    border-radius: 4px;
   }
 }
