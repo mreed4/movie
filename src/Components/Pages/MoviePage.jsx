@@ -289,7 +289,7 @@ export default function MoviePage() {
   }, [id]);
 
   return (
-    <section id="movie-page">
+    <article id="movie-page">
       <div className="movie-poster-and-info">
         <MoviePosterWatch />
         <div className="movie-info">
@@ -300,6 +300,6 @@ export default function MoviePage() {
           <MovieSimilar />
         </div>
       </div>
-    </section>
+    </article>
   );
 }

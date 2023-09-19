@@ -1,31 +1,41 @@
 import { Link } from "react-router-dom";
-import { useContext, useTransition, useMemo } from "react";
+import { useContext, useTransition, useMemo, useEffect, useState } from "react";
 import { AppContext } from "../Contexts/AppContext";
 
 import "../../assets/css/StartPage.css";
 
-export default function StartPage() {
-  const { nowPlaying, setNowPlaying, getNowPlaying, toKebabCase, alphaNumeric } = useContext(AppContext);
+function NowPlayingSection() {
+  const { nowPlaying, toKebabCase, alphaNumeric } = useContext(AppContext);
   const [isPending, startTransition] = useTransition();
+  const [page, setPage] = useState(1);
+  const [nowPlayingGroup, setNowPlaying] = useState(nowPlaying.slice(0, 4));
 
-  useMemo(() => {
-    getNowPlaying();
-  }, []);
+  useEffect(() => {
+    setNowPlaying(nowPlaying.slice(0, 4)); // Set the first four movies
+  }, [nowPlaying]);
 
   function nextFourMovies() {
-    const fourMovies = nowPlaying.slice(0, 4);
+    const nextFourMovies = nowPlaying.slice(page * 4, page * 4 + 4); // Get the next four movies
 
     startTransition(() => {
-      setNowPlaying((prev) => [...prev.slice(4), ...fourMovies]);
+      if (page === 5) {
+        // If the page is 5, reset the page to 1 and set the first four movies
+        setPage(1);
+        setNowPlaying(nowPlaying.slice(0, 4));
+      } else {
+        // Otherwise, increment the page and set the next four movies
+        setPage(page + 1);
+        setNowPlaying(nextFourMovies);
+      }
     });
   }
 
   return (
-    <section id="start-page">
+    <section className="now-playing">
       <h2>Now Playing</h2>
-      <button onClick={nextFourMovies}>Next</button>
+      <button onClick={nextFourMovies}>More</button> {page}
       <ul className="movies-now-playing">
-        {nowPlaying.map((movie) => {
+        {nowPlayingGroup.map((movie, i) => {
           const { id, title, poster_path, release_date } = movie;
           return (
             <li key={id} className="movie-now-playing">
@@ -40,5 +50,19 @@ export default function StartPage() {
         })}
       </ul>
     </section>
+  );
+}
+
+export default function StartPage() {
+  const { getNowPlaying } = useContext(AppContext);
+
+  useMemo(() => {
+    getNowPlaying();
+  }, []);
+
+  return (
+    <article id="start-page">
+      <NowPlayingSection />
+    </article>
   );
 }

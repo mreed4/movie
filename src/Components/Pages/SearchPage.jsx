@@ -16,7 +16,7 @@ export default function SearchPage() {
   } = useContext(AppContext);
 
   return (
-    <section id="search-page">
+    <article id="search-page">
       <h2>Search Page</h2>
       <form onSubmit={handleFormSubmit}>
         <input type="search" placeholder="Search for a movie..." onChange={handleSearchInputChange} value={searchTerm} />
@@ -38,6 +38,6 @@ export default function SearchPage() {
           );
         })}
       </ul>
-    </section>
+    </article>
   );
 }

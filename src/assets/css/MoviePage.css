@@ -312,14 +312,16 @@
 
   .movie-info-watch-providers {
     margin-top: 3em;
+    display: none;
   }
 
   .movie-info-watch-providers ul {
-    justify-content: center;
+    justify-content: flex-start;
+    align-content: center;
   }
 
   .movie-info-watch-provider {
-    width: calc(100% / 4);
+    width: 48px;
     margin: 0 8px 16px 0;
   }
 
@@ -360,5 +362,9 @@
 
   .movie-info-similar-movie img:hover {
     transform: none;
+  }
+
+  .just-watch {
+    text-align: center;
   }
 }
