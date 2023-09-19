@@ -13,7 +13,7 @@ function AppProvider({ children }) {
   });
   const { page } = searchState;
 
-  const [nowPlaying, setNowPlaying] = useState({});
+  const [nowPlaying, setNowPlaying] = useState([]);
 
   /* * */
 
@@ -34,9 +34,9 @@ function AppProvider({ children }) {
 
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
-    setNowPlaying(data);
+    setNowPlaying(data.results);
   }
 
   async function authenticate() {
@@ -247,6 +247,7 @@ function AppProvider({ children }) {
     movieSimilar,
     /* * */
     setSearchState,
+    setNowPlaying,
     /* * */
     authenticate,
     getNowPlaying,
