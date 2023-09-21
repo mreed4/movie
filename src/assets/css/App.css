@@ -102,6 +102,6 @@ header nav ul li a.active {
   }
 
   header {
-    margin: 2em 0 4em;
+    margin: 2em 0 0;
   }
 }

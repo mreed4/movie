@@ -34,13 +34,8 @@
   /* flex-wrap: wrap; */
 }
 
-.movie-now-playing.movie {
+.movie {
   flex: 1 0 25%;
-  padding: 0 8px;
-}
-
-.movie-upcoming.movie {
-  flex: 1 0 20%;
   padding: 0 8px;
 }
 

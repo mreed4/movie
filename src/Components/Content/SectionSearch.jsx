@@ -22,22 +22,26 @@ export default function SearchSection() {
         <input type="search" placeholder="Search for a movie..." onChange={handleSearchInputChange} value={searchTerm} />
         <button type="submit">Search</button>
       </form>
-      <h2>Results</h2>
-      <ul>
-        {searchResults.map((movie, i) => {
-          const { id, title, poster_path, release_date } = movie;
-          return (
-            <li key={id} className="movie-search-result">
-              <Link to={`/movie/${toKebabCase(alphaNumeric(title))}-${release_date.slice(0, 4)}`} state={id}>
-                <img
-                  src={poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : "https://via.placeholder.com/200x300"}
-                  alt={title}
-                />
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      {searchResults.length > 0 && (
+        <>
+          <h2>Results</h2>
+          <ul>
+            {searchResults.map((movie, i) => {
+              const { id, title, poster_path, release_date } = movie;
+              return (
+                <li key={id} className="movie-search-result">
+                  <Link to={`/movie/${toKebabCase(alphaNumeric(title))}-${release_date.slice(0, 4)}`} state={id}>
+                    <img
+                      src={poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : "https://via.placeholder.com/200x300"}
+                      alt={title}
+                    />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
     </section>
   );
 }
