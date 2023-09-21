@@ -4,9 +4,6 @@ import { AppContext } from "../Contexts/AppContext";
 
 import "../../assets/css/MoviePage.css";
 
-import IMDB from "../Content/IMDB";
-import RedPlayButton from "../Content/RedPlayButton";
-
 function MoviePosterWatch() {
   const { movieInfo } = useContext(AppContext);
 
@@ -75,6 +72,23 @@ function MovieDetails() {
   }
 
   function MovieTrailerLink() {
+    function RedPlayButton() {
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16" fill="none">
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M1.32258 1.87097L11 8L1.32258 14.129L1 1.87097H1.32258Z"
+            fill="#E54B4B"
+            stroke="#E54B4B"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+    }
+
     return (
       <a
         href={`https://www.youtube.com/watch?v=${movieVideos.results[0].key}`}
@@ -101,6 +115,31 @@ function MovieDetails() {
 }
 
 function MovieIMDB() {
+  function IMDBLogo() {
+    return (
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="32" viewBox="0 0 64 32" fill="none">
+        <rect width="64" height="32" rx="10" fill="#F5C518" />
+        <path
+          d="M1 0.5C1 0.223858 0.776142 0 0.5 0C0.223858 0 0 0.223858 0 0.5C0 0.776142 0.223858 1 0.5 1C0.776142 1 1 0.776142 1 0.5Z"
+          fill="#F5C518"
+        />
+        <path d="M8 25H13V7H8V25Z" fill="black" />
+        <path
+          d="M23.6725 7L22.5535 15.4085L21.8582 10.835C21.6566 9.37009 21.4632 8.09175 21.2781 7H15V25H19.2416L19.2581 13.1138L21.0436 25H24.0634L25.7584 12.8518L25.7707 25H30V7H23.6725Z"
+          fill="black"
+        />
+        <path
+          d="M32 25V7H39.8046C41.5694 7 43 8.41994 43 10.1766V21.8234C43 23.5778 41.5717 25 39.8046 25H32ZM37.8322 10.2395C37.6339 10.1323 37.2545 10.0807 36.7027 10.0807V21.8915C37.4313 21.8915 37.8797 21.7605 38.0478 21.4865C38.216 21.2166 38.3022 20.4861 38.3022 19.2872V12.3079C38.3022 11.494 38.272 10.974 38.216 10.7437C38.1599 10.5135 38.0349 10.3467 37.8322 10.2395Z"
+          fill="black"
+        />
+        <path
+          d="M52.4299 11.5069H52.7495C54.5447 11.5069 56 12.9127 56 14.6449V21.862C56 23.5951 54.5452 25 52.7495 25H52.4299C51.3315 25 50.3603 24.4737 49.7719 23.6683L49.4839 24.7688H45V7H49.7843V12.7805C50.4025 12.0102 51.3552 11.5069 52.4299 11.5069ZM51.4056 20.2842V16.0191C51.4056 15.3143 51.3603 14.8519 51.2661 14.639C51.1718 14.4261 50.7956 14.2894 50.5317 14.2894C50.2678 14.2894 49.8608 14.4005 49.7816 14.5877V16.0191V20.4208V21.8075C49.8721 22.013 50.2602 22.1274 50.5317 22.1274C50.8031 22.1274 51.1982 22.0167 51.2812 21.8075C51.3641 21.5983 51.4056 21.0881 51.4056 20.2842Z"
+          fill="black"
+        />
+      </svg>
+    );
+  }
+
   const { movieIMDBRating, movieInfo, getMovieIMDBRating } = useContext(AppContext);
 
   useEffect(() => {
@@ -109,7 +148,7 @@ function MovieIMDB() {
 
   return (
     <div className="movie-info-imdb-rating">
-      <IMDB />
+      <IMDBLogo />
       <div>
         <span>{movieIMDBRating.imdbRating}</span>
         <span>/ 10</span>
@@ -289,7 +328,7 @@ export default function MoviePage() {
   }, [id]);
 
   return (
-    <article id="movie-page">
+    <article id="movie-page" className="fade-in">
       <div className="movie-poster-and-info">
         <MoviePosterWatch />
         <div className="movie-info">

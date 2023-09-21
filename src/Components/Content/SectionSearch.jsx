@@ -16,7 +16,7 @@ export default function SearchSection() {
   } = useContext(AppContext);
 
   return (
-    <section id="search-page">
+    <section className="search-page fade-in">
       <h2>Search</h2>
       <form onSubmit={handleFormSubmit}>
         <input type="search" placeholder="Search for a movie..." onChange={handleSearchInputChange} value={searchTerm} />

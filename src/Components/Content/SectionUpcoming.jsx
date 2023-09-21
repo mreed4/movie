@@ -37,7 +37,7 @@ export default function UpcomingSection() {
   }
 
   return (
-    <section className="upcoming">
+    <section className="upcoming fade-in">
       <h2>Upcoming</h2>
       <button onClick={getNextFiveMovies}>More</button> {page}
       <ul className="movies-upcoming movies-list">

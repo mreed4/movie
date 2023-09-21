@@ -41,7 +41,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 4em 0 6em;
+  margin: 4em 0 0;
 }
 
 header a {
@@ -76,6 +76,23 @@ header nav ul li a.active {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.fade-in {
+  animation: fadeIn ease 250ms;
+  -webkit-animation: fadeIn ease 250ms;
+  -moz-animation: fadeIn ease 250ms;
+  -o-animation: fadeIn ease 250ms;
+  -ms-animation: fadeIn ease 250ms;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
