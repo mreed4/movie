@@ -2,8 +2,6 @@ import { useLocation, Link } from "react-router-dom";
 import { useContext, useMemo, useEffect } from "react";
 import { AppContext } from "../Contexts/AppContext";
 
-import dayjs from "dayjs";
-
 import "../../assets/css/MoviePage.css";
 
 import IMDB from "../Content/IMDB";
@@ -40,7 +38,7 @@ function MovieDetails() {
   const hasRuntime = movieInfo.runtime !== 0;
 
   function MovieReleaseDate() {
-    return <span>{dayjs(movieInfo.release_date).format("MM/DD/YYYY")}</span>;
+    return <span>{movieInfo.release_date.slice(0, 4)}</span>;
   }
 
   function MovieGenres() {

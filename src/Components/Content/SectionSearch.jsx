@@ -4,7 +4,7 @@ import { AppContext } from "../Contexts/AppContext";
 
 import "../../assets/css/SearchPage.css";
 
-export default function SearchPage() {
+export default function SearchSection() {
   const {
     searchState: { searchTerm, page, searchResults },
     handleSearchInputChange,
@@ -16,8 +16,8 @@ export default function SearchPage() {
   } = useContext(AppContext);
 
   return (
-    <article id="search-page">
-      <h2>Search Page</h2>
+    <section id="search-page">
+      <h2>Search</h2>
       <form onSubmit={handleFormSubmit}>
         <input type="search" placeholder="Search for a movie..." onChange={handleSearchInputChange} value={searchTerm} />
         <button type="submit">Search</button>
@@ -38,6 +38,6 @@ export default function SearchPage() {
           );
         })}
       </ul>
-    </article>
+    </section>
   );
 }

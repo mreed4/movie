@@ -1,17 +1,25 @@
 async function handler(event) {
   const TMDB_KEY = process.env.TMDB_KEY;
-  const { query: searchTerm, page } = event.queryStringParameters;
+
+  const dateToday = new Date();
+  const dateTodayString = dateToday.toISOString().split("T")[0];
+  const dateTwoMonthsFromNow = new Date(dateToday.setDate(dateToday.getDate() + 60)).toISOString().split("T")[0];
 
   const endpoint = "https://api.themoviedb.org/3/discover/movie";
 
   const searchOptions = [
-    `with_text_query=${searchTerm}`,
-    `include_adult=false`,
-    `page=${page}`,
-    `region=us`,
-    `original_language=en`,
-    `sort_by=popularity.desc`,
-    `without_genres=16`,
+    `page=1`,
+    "language=en-US",
+    "sort_by=popularity.desc",
+    "include_adult=false",
+    "include_video=false",
+    `primary_release_date.gte=${dateTodayString}`,
+    `primary_release_date.lte=${dateTwoMonthsFromNow}`,
+    "region=us",
+    "watch_region=us",
+    "wtih_original_language=en",
+    "with_release_type=1|3", // 1 = premiere, 3 = theatrical
+    "with_runtime.gte=60",
   ].join("&");
 
   const URL = `${endpoint}?${searchOptions}`;

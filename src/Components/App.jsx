@@ -3,9 +3,11 @@ import { NavLink, Link } from "react-router-dom";
 
 import "../assets/css/App.css";
 
-import SearchPage from "./Pages/SearchPage";
 import MoviePage from "./Pages/MoviePage";
 import StartPage from "./Pages/StartPage";
+import NowPlayingSection from "./Content/SectionNowPlaying";
+import SearchSection from "./Content/SectionSearch";
+import UpcomingSection from "./Content/SectionUpcoming";
 
 function App() {
   return (
@@ -27,7 +29,11 @@ function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<StartPage />} />
+          <Route path="/" element={<StartPage />}>
+            <Route index element={<NowPlayingSection />} />
+            <Route path="search" element={<SearchSection />} />
+            <Route path="upcoming" element={<UpcomingSection />} />
+          </Route>
           {/* <Route path="/movies" element={<StartPage />} /> */}
           <Route path="/movie/:movieDetails" element={<MoviePage />} />
           <Route path="/shows" element={<h2>Shows</h2>} />

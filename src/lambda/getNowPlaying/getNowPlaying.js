@@ -1,5 +1,4 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
-const handler = async (event) => {
+async function handler(event) {
   const TMDB_KEY = process.env.TMDB_KEY;
 
   const dateToday = new Date();
@@ -60,6 +59,6 @@ const handler = async (event) => {
       body: JSON.stringify({ msg: error.message }),
     };
   }
-};
+}
 
 module.exports = { handler };

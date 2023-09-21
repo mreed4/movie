@@ -14,6 +14,7 @@ function AppProvider({ children }) {
   const { page } = searchState;
 
   const [nowPlaying, setNowPlaying] = useState([]);
+  const [upcoming, setUpcoming] = useState([]);
 
   /* * */
 
@@ -39,6 +40,18 @@ function AppProvider({ children }) {
     setNowPlaying(data.results);
   }
 
+  async function getUpcoming() {
+    const URL = `${netlify}/getUpcoming`;
+
+    const response = await fetch(URL);
+
+    const data = await response.json();
+
+    // console.log(data);
+
+    setUpcoming(data.results);
+  }
+
   async function authenticate() {
     // Not used yet
     const URL = `${netlify}/authenticate`;
@@ -58,7 +71,7 @@ function AppProvider({ children }) {
 
     if (!searchTerm) return;
 
-    const URL = `${netlify}/search?query=${searchTerm}&include_adult=false&page=${page}`;
+    const URL = `${netlify}/search?query=${searchTerm}`;
 
     const response = await fetch(URL);
     const data = await response.json();
@@ -238,6 +251,7 @@ function AppProvider({ children }) {
   const value = {
     searchState,
     nowPlaying,
+    upcoming,
     movieInfo,
     movieImages,
     movieCredits,
@@ -248,9 +262,12 @@ function AppProvider({ children }) {
     /* * */
     setSearchState,
     setNowPlaying,
+    setUpcoming,
+    /* * */
+    getNowPlaying,
+    getUpcoming,
     /* * */
     authenticate,
-    getNowPlaying,
     getSearchResults,
     getMovieInfo,
     getMovieImages,
