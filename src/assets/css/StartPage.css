@@ -34,9 +34,23 @@
   /* flex-wrap: wrap; */
 }
 
+.movies-list.movies-search-results {
+  flex-wrap: wrap;
+  overflow: visible;
+}
+
 .movie {
   flex: 1 0 25%;
   padding: 0 8px;
+}
+
+.movies-list.movies-search-results .movie {
+  padding: 4px;
+  flex: 1 1 calc(calc(100% / 7) - 8px);
+}
+
+.movies-list.movies-search-results .movie img {
+  border-radius: 6px;
 }
 
 .movie a {
@@ -73,7 +87,12 @@
     flex-wrap: wrap;
   }
 
-  .movie {
+  .movies-list.movies-search-results .movie {
+    padding: 0 8px;
+  }
+
+  .movie,
+  .movies-list.movies-search-results .movie {
     flex: 1 1 50%;
     margin: 0 0 16px 0;
   }

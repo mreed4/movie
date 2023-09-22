@@ -15,6 +15,7 @@ function AppProvider({ children }) {
 
   const [nowPlaying, setNowPlaying] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
+  const [popular, setPopular] = useState([]);
 
   /* * */
 

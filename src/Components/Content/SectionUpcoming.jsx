@@ -1,37 +1,37 @@
 import { useContext, useEffect, useMemo, useState, useTransition } from "react";
-import { Link } from "react-router-dom";
 
 import { AppContext } from "../Contexts/AppContext";
+import PartMovieListItem from "./Parts/MovieListItem";
 
 export default function UpcomingSection() {
-  const { upcoming, toKebabCase, alphaNumeric } = useContext(AppContext);
+  const { upcoming } = useContext(AppContext);
   const [isPending, startTransition] = useTransition();
   const [page, setPage] = useState(1);
+  const [upcomingGroup, setUpcomingGroup] = useState(upcoming.slice(0, 5));
 
-  const sortedUpcoming = useMemo(() => {
+  useMemo(() => {
     return upcoming.sort((a, b) => {
       return a.release_date < b.release_date ? 1 : -1;
     });
   }, [upcoming]);
 
-  const [upcomingGroup, setUpcoming] = useState(sortedUpcoming.slice(0, 5));
-
   useEffect(() => {
-    setUpcoming(sortedUpcoming.slice(0, 5)); // Set the first four movies
-  }, [sortedUpcoming]);
+    setUpcomingGroup(upcoming.slice(0, 4)); // Set the first four movies
+  }, [upcoming]);
 
-  function getNextFiveMovies() {
-    const nextFiveMovies = sortedUpcoming.slice(page * 5, page * 5 + 5);
+  function getNextFourMovies() {
+    const nextFourMovies = upcoming.slice(page * 4, page * 4 + 4);
+    // Get the next four movies
 
     startTransition(() => {
-      if (page === 4) {
+      if (page === 5) {
         // If the page is 5, reset the page to 1 and set the first four movies
         setPage(1);
-        setUpcoming(sortedUpcoming.slice(0, 5));
+        setUpcomingGroup(upcoming.slice(0, 4));
       } else {
         // Otherwise, increment the page and set the next four movies
         setPage(page + 1);
-        setUpcoming(nextFiveMovies);
+        setUpcomingGroup(nextFourMovies);
       }
     });
   }
@@ -39,18 +39,13 @@ export default function UpcomingSection() {
   return (
     <section className="upcoming fade-in">
       <h2>Upcoming</h2>
-      <button onClick={getNextFiveMovies}>More</button> {page}
+      <button onClick={getNextFourMovies}>More</button> {page}
       <ul className="movies-upcoming movies-list">
-        {upcomingGroup.map((movie, i) => {
-          const { id, title, poster_path, release_date } = movie;
+        {upcomingGroup.map((movie) => {
+          const { id } = movie;
           return (
             <li key={id} className="movie-upcoming movie">
-              <Link to={`/movie/${toKebabCase(alphaNumeric(title))}-${release_date.slice(0, 4)}`} state={id}>
-                <img
-                  src={poster_path ? `https://image.tmdb.org/t/p/w400${poster_path}` : "https://via.placeholder.com/200x300"}
-                  alt={title}
-                />
-              </Link>
+              <PartMovieListItem movie={movie} />
             </li>
           );
         })}

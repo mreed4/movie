@@ -1,41 +1,52 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AppContext } from "../Contexts/AppContext";
+import { useContext, useRef, useMemo } from "react";
 
-import "../../assets/css/SearchPage.css";
+import { AppContext } from "../Contexts/AppContext";
+import PartMovieListItem from "./Parts/MovieListItem";
 
 export default function SearchSection() {
   const {
-    searchState: { searchTerm, page, searchResults },
-    handleSearchInputChange,
-    handleFormSubmit,
-    nextPage,
-    prevPage,
-    toKebabCase,
-    alphaNumeric,
+    searchState: { searchResults, searchTerm },
+    setSearchState,
+    getSearchResults,
   } = useContext(AppContext);
+
+  const searchInputRef = useRef(null);
+
+  useMemo(() => {
+    getSearchResults();
+  }, [searchTerm]);
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+
+    const { value } = searchInputRef.current;
+
+    setSearchState((prev) => ({
+      ...prev,
+      searchTerm: value,
+    }));
+
+    searchInputRef.current.value = "";
+
+    searchInputRef.current.focus();
+  }
 
   return (
     <section className="search-page fade-in">
       <h2>Search</h2>
       <form onSubmit={handleFormSubmit}>
-        <input type="search" placeholder="Search for a movie..." onChange={handleSearchInputChange} value={searchTerm} />
+        <input type="search" placeholder="Search for a movie..." ref={searchInputRef} />
         <button type="submit">Search</button>
       </form>
       {searchResults.length > 0 && (
         <>
           <h2>Results</h2>
-          <ul>
-            {searchResults.map((movie, i) => {
-              const { id, title, poster_path, release_date } = movie;
+          <ul className="movies-search-results movies-list">
+            {searchResults.map((movie) => {
+              const { id } = movie;
               return (
-                <li key={id} className="movie-search-result">
-                  <Link to={`/movie/${toKebabCase(alphaNumeric(title))}-${release_date.slice(0, 4)}`} state={id}>
-                    <img
-                      src={poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : "https://via.placeholder.com/200x300"}
-                      alt={title}
-                    />
-                  </Link>
+                <li className="movie-search-result movie" key={id}>
+                  <PartMovieListItem movie={movie} />
                 </li>
               );
             })}

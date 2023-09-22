@@ -6,32 +6,6 @@ import "../../assets/css/MoviePage.css";
 
 function MoviePosterWatch() {
   const { movieInfo } = useContext(AppContext);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const img = new Image();
-  //   img.src = `https://image.tmdb.org/t/p/w400${movieInfo.poster_path}`;
-  //   img.onload = () => {
-  //     setLoading(false);
-  //   };
-  // }, [movieInfo]);
-
-  // function Loader() {
-  //   return (
-  //     <div className="loading" style={{ backgroundColor: "red", height: 600, width: 400 }}>
-  //       Loading
-  //     </div>
-  //   );
-  // }
-
-  // function MoviePoster() {
-  //   return (
-  //     <>
-  //       <img src={`https://image.tmdb.org/t/p/w400${movieInfo.poster_path}`} alt={movieInfo.title} className="blur" />
-  //       <img src={`https://image.tmdb.org/t/p/w400${movieInfo.poster_path}`} alt={movieInfo.title} className="poster" />
-  //     </>
-  //   );
-  // }
 
   return (
     <aside className="movie-poster-and-rating">
