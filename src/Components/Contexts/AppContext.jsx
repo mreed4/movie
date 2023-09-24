@@ -19,6 +19,11 @@ function AppProvider({ children }) {
 
   /* * */
 
+  const [personInfo, setPersonInfo] = useState({});
+  const [personCredits, setPersonCredits] = useState({});
+
+  /* * */
+
   const [movieInfo, setMovieInfo] = useState({});
   const [movieImages, setMovieImages] = useState({});
   const [movieCredits, setMovieCredits] = useState({});
@@ -26,6 +31,36 @@ function AppProvider({ children }) {
   const [movieVideos, setMovieVideos] = useState({});
   const [movieProviders, setMovieProviders] = useState({});
   const [movieSimilar, setMovieSimilar] = useState({});
+
+  /* * */
+
+  async function getPersonInfo(id) {
+    if (!id) return;
+
+    const URL = `${netlify}/getPersonInfo?id=${id}`;
+
+    const response = await fetch(URL);
+
+    const data = await response.json();
+
+    // console.log(data);
+
+    setPersonInfo(data);
+  }
+
+  async function getPersonCredits(id) {
+    if (!id) return;
+
+    const URL = `${netlify}/getPersonCredits?id=${id}`;
+
+    const response = await fetch(URL);
+
+    const data = await response.json();
+
+    // console.log(data);
+
+    setPersonCredits(data);
+  }
 
   /* * */
 
@@ -52,6 +87,8 @@ function AppProvider({ children }) {
 
     setUpcoming(data.results);
   }
+
+  /* * */
 
   async function authenticate() {
     // Not used yet
@@ -152,7 +189,7 @@ function AppProvider({ children }) {
 
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
     setMovieVideos(data);
   }
@@ -166,7 +203,7 @@ function AppProvider({ children }) {
 
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
     setMovieProviders(data);
   }
@@ -180,7 +217,7 @@ function AppProvider({ children }) {
 
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
     setMovieSimilar(data);
   }
@@ -210,11 +247,11 @@ function AppProvider({ children }) {
   /* * */
 
   function toKebabCase(str) {
-    return str.toLowerCase().replace(/ /g, "-");
+    return str?.toLowerCase().replace(/ /g, "-");
   }
 
   function alphaNumeric(str) {
-    return str.replace(/[^a-z0-9]/gi, "-").replace(/-+/g, "-");
+    return str?.replace(/[^a-z0-9]/gi, "-").replace(/-+/g, "-");
   }
 
   function titleCase(str) {
@@ -251,8 +288,14 @@ function AppProvider({ children }) {
 
   const value = {
     searchState,
+    /* * */
     nowPlaying,
     upcoming,
+    popular,
+    /* * */
+    personInfo,
+    personCredits,
+    /* * */
     movieInfo,
     movieImages,
     movieCredits,
@@ -264,6 +307,9 @@ function AppProvider({ children }) {
     setSearchState,
     setNowPlaying,
     setUpcoming,
+    /* * */
+    getPersonInfo,
+    getPersonCredits,
     /* * */
     getNowPlaying,
     getUpcoming,

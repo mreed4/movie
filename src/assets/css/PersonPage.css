@@ -1,0 +1,95 @@
+.person-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.person-page-image {
+  width: 348px;
+  /* position: relative; */
+  margin-right: 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.person-page-info h2 {
+  margin-top: -18px;
+}
+
+.person-image {
+  display: block;
+  width: 348px;
+  height: 348px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.person-page-credits-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 3em;
+}
+
+.person-bio {
+  margin-bottom: 3em;
+}
+
+.person-page-credits-list .person-page-credits-list-item {
+  margin: 0.5em 0;
+}
+
+.person-page-credits-list .person-page-credits-list-item a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.person-page-credits-list .person-page-credits-list-item img {
+  display: block;
+  object-fit: cover;
+  width: 100px;
+  margin-right: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+  filter: brightness(85%) opacity(0.95) saturate(1) contrast(1.1);
+  transition: filter 200ms ease-in-out, transform 200ms ease-in-out;
+}
+
+.person-page-credits-list .person-page-credits-list-item img:hover {
+  filter: brightness(100%) opacity(1) saturate(1.25) contrast(1);
+}
+
+.person-page-credits-list-also {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  /* margin-top: 3em; */
+}
+
+.person-page-credits-list-also .person-page-credits-list-item {
+  margin: 0.5em 0;
+  width: 50%;
+  padding: 0 1em 0 0;
+}
+
+.person-page-credits-list-also .person-page-credits-list-item span {
+  display: block;
+  /* margin-bottom: 0.5em; */
+}
+
+.person-page-credits-list-also .person-page-credits-list-item a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  padding: 0.5em 0;
+}

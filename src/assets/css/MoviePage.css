@@ -1,7 +1,3 @@
-#movie-page {
-  padding-top: 6em;
-}
-
 .movie-poster-and-info {
   display: flex;
   flex-direction: row;
@@ -89,7 +85,9 @@
   margin-top: 48px;
 }
 
-.movie-info-imdb-rating {
+.movie-info-imdb-rating a {
+  color: inherit;
+  text-decoration: none;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -188,12 +186,17 @@
 }
 
 .movie-info-credits-cast-member {
+  margin: 0 48px 48px 0;
+  width: 96px;
+}
+
+.movie-info-credits-cast-member a {
+  color: inherit;
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 48px;
-  width: 96px;
 }
 
 .movie-info-credits-cast-member:last-of-type {
@@ -226,12 +229,11 @@
   /* border: 1px solid var(--dark-white); */
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
   filter: grayscale(100%) contrast(120%) brightness(90%) opacity(30%);
-  transition: filter 0.2s ease-in-out, transform 0.2s ease-in-out;
+  transition: filter 0.2s ease-in-out;
 }
 
 .movie-info-similar-movie img:hover {
   filter: none;
-  transform: scale(1.05);
 }
 
 .just-watch {

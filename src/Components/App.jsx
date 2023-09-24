@@ -5,6 +5,8 @@ import "../assets/css/App.css";
 
 import MoviePage from "./Pages/MoviePage";
 import StartPage from "./Pages/StartPage";
+import PersonPage from "./Pages/PersonPage";
+
 import NowPlayingSection from "./Content/SectionNowPlaying";
 import SearchSection from "./Content/SectionSearch";
 import UpcomingSection from "./Content/SectionUpcoming";
@@ -42,6 +44,7 @@ function App() {
             <Route path="search" element={<SearchSection />} />
             <Route path="upcoming" element={<UpcomingSection />} />
           </Route>
+          <Route path="/person/:personDetails" element={<PersonPage />} />
           <Route path="/movie/:movieDetails" element={<MoviePage />} />
           <Route path="/shows" element={<h2>Shows</h2>} />
           <Route path="*" element={<h1>Not Found</h1>} />

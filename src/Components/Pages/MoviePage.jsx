@@ -142,17 +142,24 @@ function MovieIMDB() {
 
   const { movieIMDBRating, movieInfo, getMovieIMDBRating } = useContext(AppContext);
 
-  useEffect(() => {
+  useMemo(() => {
     getMovieIMDBRating(movieInfo.imdb_id);
-  }, [movieInfo]);
+  }, [movieInfo.imdb_id]);
 
   return (
     <div className="movie-info-imdb-rating">
-      <IMDBLogo />
-      <div>
-        <span>{movieIMDBRating.imdbRating}</span>
-        <span>/ 10</span>
-      </div>
+      <a
+        href={`https://www.imdb.com/title/${movieInfo.imdb_id}`}
+        target="_blank"
+        rel="noreferrer"
+        className="movie-info-imdb-link"
+        title="View on IMDb">
+        <IMDBLogo />
+        <div>
+          <span>{movieIMDBRating.imdbRating}</span>
+          <span>/ 10</span>
+        </div>
+      </a>
     </div>
   );
 }
@@ -223,20 +230,25 @@ function MovieCredits() {
     return (
       <div className="movie-info-credits-cast">
         <ul>
-          {movieCredits.cast.slice(0, 4).map((castMember) => {
-            const { id, name, character, profile_path } = castMember;
-            return (
-              <li key={id} className="movie-info-credits-cast-member">
-                <img src={`https://image.tmdb.org/t/p/w200${profile_path}`} alt={name} title={`${name} as ${character}`} />
-                <span className="truncate" title={name}>
-                  {name}
-                </span>
-                <span className="truncate" title={character}>
-                  {character}
-                </span>
-              </li>
-            );
-          })}
+          {movieCredits.cast
+            .sort((a, b) => b.popularity - a.popularity) // Sort the cast members by popularity
+            .slice(0, 8) // Slice the first 4 cast members
+            .map((castMember) => {
+              const { id, name, character, profile_path } = castMember;
+              return (
+                <li key={id} className="movie-info-credits-cast-member">
+                  <Link to={`/person/${id}`} state={id} className="movie-info-credits-cast-member-link">
+                    <img src={`https://image.tmdb.org/t/p/w200${profile_path}`} alt={name} title={`${name} as ${character}`} />
+                    <span className="truncate" title={name}>
+                      {name}
+                    </span>
+                    <span className="truncate" title={character}>
+                      {character}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </div>
     );
@@ -328,7 +340,7 @@ export default function MoviePage() {
   }, [id]);
 
   return (
-    <article id="movie-page" className="fade-in">
+    <article id="movie-page" className="fade-in app-page">
       <div className="movie-poster-and-info">
         <MoviePosterWatch />
         <div className="movie-info">
